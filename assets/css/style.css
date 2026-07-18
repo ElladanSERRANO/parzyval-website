@@ -7,13 +7,79 @@
 
 body {
     background-color: var(--bg-color);
+    /* Création d'une grille Cyberpunk subtile */
+    background-image: 
+        linear-gradient(rgba(255, 77, 148, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 77, 148, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px; /* Taille des carreaux de la grille */
+    background-position: center center;
+    
     color: var(--text-main);
     font-family: system-ui, -apple-system, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
-    padding: 40px 20px;
+    min-height: 100vh; /* S'assure que le fond couvre tout l'écran */
+}
+
+/* --- NAVIGATION GLOBALE --- */
+.global-nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(13, 13, 18, 0.85); /* Fond sombre transparent */
+    backdrop-filter: blur(10px); /* L'effet verre dépoli Cyberpunk */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(255, 77, 148, 0.15);
+    z-index: 1000;
+}
+
+.nav-logo a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-main);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-logo span {
+    color: var(--neon-pink);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px rgba(255, 77, 148, 0.4);
+}
+
+.nav-links a.disabled {
+    color: #555;
+    pointer-events: none;
+}
+
+/* On ajuste le header de page pour ne pas être collé à la nav */
+.page-header {
+    margin-top: 40px;
+    text-align: center;
 }
 
 h1 {

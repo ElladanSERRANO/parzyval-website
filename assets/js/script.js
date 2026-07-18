@@ -77,4 +77,60 @@ document.addEventListener('DOMContentLoaded', () => {
             audio.currentTime = 0;
         });
     });
+
+    // --- FORCE DOWNLOAD SYSTEM ---
+    const downloadBtns = document.querySelectorAll('.download-btn');
+    
+    downloadBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            // 1. On bloque le comportement par défaut (l'ouverture du nouvel onglet)
+            e.preventDefault();
+            
+            const fileUrl = btn.getAttribute('href');
+            // On récupère le nom du fichier depuis l'attribut download, ou on met un nom par défaut
+            const fileName = btn.getAttribute('download') || 'Parzyval_Track.mp3'; 
+            
+            // UX : Indiquer que le téléchargement démarre
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Loading...';
+            btn.style.pointerEvents = 'none'; // Empêche le double-clic
+
+            try {
+                // 2. On télécharge la donnée en arrière-plan
+                const response = await fetch(fileUrl);
+                if (!response.ok) throw new Error("Network response was not ok");
+                
+                // 3. On la convertit en donnée brute (Blob)
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                
+                // 4. On crée un faux lien invisible, on clique dessus, et on le détruit
+                const tempLink = document.createElement('a');
+                tempLink.style.display = 'none';
+                tempLink.href = blobUrl;
+                tempLink.download = fileName;
+                
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                
+                // 5. Nettoyage de la mémoire
+                document.body.removeChild(tempLink);
+                window.URL.revokeObjectURL(blobUrl);
+                
+                // On remet le bouton à son état normal
+                btn.innerHTML = originalText;
+                btn.style.pointerEvents = 'auto';
+
+            } catch (error) {
+                console.error('Le téléchargement a échoué :', error);
+                btn.innerHTML = '❌ Erreur';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.pointerEvents = 'auto';
+                }, 3000);
+            }
+        });
+    });
 });
+
+
