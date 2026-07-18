@@ -457,6 +457,74 @@ audio {
 .song-card:nth-child(6) { animation-delay: 0.6s; }
 
 
+/* --- COMPOSANT : PISTE VERROUILLÉE --- */
+
+.song-card.locked {
+    border-color: rgba(255, 51, 51, 0.2);
+    background: repeating-linear-gradient(
+        45deg,
+        #12121a,
+        #12121a 10px,
+        #161214 10px,
+        #161214 20px
+    );
+    opacity: 0.8; /* Légèrement en retrait visuel */
+}
+
+.song-card.locked h2 {
+    color: #ff3333;
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+    font-family: var(--font-tech); /* On force la police tech pour les erreurs */
+    letter-spacing: 2px;
+}
+
+.security-terminal {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 51, 51, 0.05);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 15px 0 25px 0;
+    border: 1px dashed rgba(255, 51, 51, 0.3);
+}
+
+.warning-icon {
+    font-size: 1.5rem;
+    animation: blinkWarning 1.5s infinite;
+}
+
+.warning-text {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-tech);
+}
+
+.warning-text .alert {
+    color: #ff3333;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.warning-text .condition {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.locked-action {
+    display: inline-block;
+    color: #555;
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    cursor: not-allowed;
+}
+
+@keyframes blinkWarning {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
 @keyframes scanlineScroll {
     0% { background-position: 0 0; }
     100% { background-position: 0 -100vh; }
@@ -468,4 +536,101 @@ audio {
     0% { opacity: 0.5; box-shadow: 0 0 4px var(--neon-cyan); }
     50% { opacity: 1; box-shadow: 0 0 12px var(--neon-cyan); }
     100% { opacity: 0.5; box-shadow: 0 0 4px var(--neon-cyan); }
+}
+
+
+
+/* =========================================
+   RESPONSIVITÉ STRICTE (MOBILES & TABLETTES)
+   S'active uniquement sous 768px de largeur
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Purge du padding global */
+    body {
+        padding: 15px 10px; 
+    }
+
+    /* 2. Réparation de la Navigation Globale */
+    .global-nav {
+        flex-direction: column; /* On empile au lieu d'aligner */
+        padding: 15px;
+        gap: 15px;
+        position: relative; /* Enlève le sticky sur mobile pour gagner de la place */
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap; /* Autorise les liens à passer à la ligne */
+        justify-content: center;
+    }
+
+/* 3. Réduction et cassure des Titres massifs */
+    .page-header h1 {
+        font-size: 1.4rem; 
+        padding: 0 10px;
+        word-break: break-word; /* Ordre formel : casse le mot si nécessaire */
+        overflow-wrap: break-word; /* Sécurité standard moderne */
+        line-height: 1.3; /* Aère l'espace entre les lignes cassées */
+    }
+
+    /* Sécurité pour le logo de la navigation */
+    .nav-logo a {
+        font-size: 1rem;
+        word-break: break-word;
+        white-space: normal;
+    }
+    
+    .page-header .subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 25px;
+    }
+
+    /* 4. Réparation du Terminal d'accueil */
+    .welcome-terminal {
+        margin-bottom: 25px;
+    }
+
+    .terminal-body {
+        padding: 15px 20px;
+    }
+
+    .terminal-footer {
+        flex-direction: column; /* Empile le statut et le nombre de pistes */
+        gap: 10px;
+        padding: 15px 20px;
+    }
+
+    /* 5. Réparation de la Lore Card et du Bouton AO3 */
+    .lore-card {
+        flex-direction: column;
+        align-items: stretch; /* Étire les éléments sur toute la largeur */
+        padding: 20px 15px;
+        gap: 15px;
+    }
+
+    .ao3-btn {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        white-space: normal; /* CRUCIAL : Autorise le texte à revenir à la ligne */
+        font-size: 0.85rem;
+        padding: 12px 10px;
+    }
+
+    /* 6. Ajustement des cartes Audio */
+    .song-card {
+        padding: 20px 15px;
+    }
+    
+    .custom-player {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .time-display {
+        min-width: 75px; /* Réduit un peu l'espace réservé au temps */
+        font-size: 0.8rem;
+    }
 }
