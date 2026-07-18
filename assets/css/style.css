@@ -457,6 +457,73 @@ audio {
 .song-card:nth-child(6) { animation-delay: 0.6s; }
 
 
+
+/* --- CARTE CLASSIFIÉE (HUB) : DONNÉES INSTABLES --- */
+
+/* 1. État de base (Avertissement subtil) */
+.release-card.classified {
+    border-color: rgba(255, 51, 51, 0.3);
+}
+
+/* 2. Perte de signal au survol */
+.release-card.classified:hover {
+    border-color: #ff3333;
+    box-shadow: 0 10px 30px rgba(255, 51, 51, 0.2);
+    /* Le saut erratique de connexion (Data Drop) */
+    animation: dataDrop 3s infinite;
+}
+
+/* 3. Le texte qui tremble */
+.release-card.classified:hover h2 {
+    color: #ff3333;
+    animation: textJitter 0.2s infinite;
+}
+
+/* 4. Le visuel qui bascule en interférence */
+.release-card.classified:hover .cover-placeholder {
+    /* Remplace le fond plat par des lignes de balayage rouges corrompues */
+    background: repeating-linear-gradient(
+        0deg,
+        #0d0d12,
+        #0d0d12 3px,
+        #330a0a 3px,
+        #330a0a 4px
+    );
+    color: #ff3333;
+    border: 1px dashed rgba(255, 51, 51, 0.5);
+    text-shadow: 0 0 5px #ff3333;
+}
+
+
+/* --- L'EFFET GLITCH (SURVOL DES PISTES VERROUILLÉES) --- */
+
+/* 1. Déstabilisation de la carte */
+.song-card.locked:hover {
+    border-color: #ff3333;
+    box-shadow: inset 0 0 15px rgba(255, 51, 51, 0.1), 0 0 20px rgba(255, 51, 51, 0.3);
+    background: repeating-linear-gradient(
+        45deg,
+        #1a1214,
+        #1a1214 10px,
+        #221214 10px,
+        #221214 20px
+    );
+}
+
+/* 2. Aberration chromatique sur le titre */
+.song-card.locked:hover h2 {
+    animation: textGlitch 0.2s linear infinite;
+    color: #fff; /* Le texte devient blanc pur pour maximiser le contraste des ombres */
+}
+
+/* 3. Distorsion de l'icône d'alerte */
+.song-card.locked:hover .warning-icon {
+    animation: iconGlitch 0.3s linear infinite;
+    color: #fff;
+    text-shadow: 0 0 10px #ff3333;
+}
+
+
 /* --- COMPOSANT : PISTE VERROUILLÉE --- */
 
 .song-card.locked {
@@ -538,7 +605,57 @@ audio {
     100% { opacity: 0.5; box-shadow: 0 0 4px var(--neon-cyan); }
 }
 
+@keyframes textGlitch {
+    0% { 
+        text-shadow: 3px 0 var(--neon-cyan), -3px 0 var(--neon-pink); 
+        transform: translate(0); 
+    }
+    20% { 
+        text-shadow: -3px 0 var(--neon-cyan), 3px 0 var(--neon-pink); 
+        transform: translate(-2px, 1px); 
+    }
+    40% { 
+        text-shadow: 3px 0 var(--neon-cyan), -3px 0 var(--neon-pink); 
+        transform: translate(2px, -1px); 
+    }
+    60% { 
+        text-shadow: -3px 0 var(--neon-cyan), 3px 0 var(--neon-pink); 
+        transform: translate(-2px, 2px); 
+    }
+    80% { 
+        text-shadow: 3px 0 var(--neon-cyan), -3px 0 var(--neon-pink); 
+        transform: translate(2px, -2px); 
+    }
+    100% { 
+        text-shadow: -3px 0 var(--neon-cyan), 3px 0 var(--neon-pink); 
+        transform: translate(0); 
+    }
+}
 
+@keyframes iconGlitch {
+    0% { transform: skew(0deg) scale(1); }
+    20% { transform: skew(-10deg) scale(1.2); }
+    40% { transform: skew(10deg) scale(0.9); }
+    60% { transform: skew(-10deg) scale(1.1); }
+    80% { transform: skew(10deg) scale(0.8); }
+    100% { transform: skew(0deg) scale(1); }
+}
+
+/* Simule une coupure de connexion brutale à 95% du cycle */
+@keyframes dataDrop {
+    0%, 94%, 100% { transform: translateY(-5px) translateX(0); opacity: 1; }
+    95% { transform: translateY(-5px) translateX(-4px); opacity: 0.5; }
+    96% { transform: translateY(-5px) translateX(4px); opacity: 1; filter: hue-rotate(90deg); }
+    97% { transform: translateY(-5px) translateX(-2px); opacity: 0.8; filter: grayscale(1); }
+    98% { transform: translateY(-5px) translateX(0); filter: none; }
+}
+
+/* Micro-vibration constante du texte */
+@keyframes textJitter {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-1px); }
+    75% { transform: translateX(1px); }
+}
 
 /* =========================================
    RESPONSIVITÉ STRICTE (MOBILES & TABLETTES)
