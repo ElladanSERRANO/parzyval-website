@@ -1,26 +1,50 @@
+/* --- VARIABLES FONDAMENTALES V2 --- */
 :root {
-    --bg-color: #0d0d12;
-    --card-bg: #1a1a24;
+    --bg-color: #08080c; /* Encore plus profond */
+    --card-bg: #12121a;
     --neon-pink: #ff4d94;
+    --neon-cyan: #00f3ff; /* Nouvelle couleur de contraste */
     --text-main: #e0e0e0;
+    
+    /* Nouvelles Typographies */
+    --font-heading: 'Orbitron', sans-serif; /* Futuriste et large pour les titres */
+    --font-body: 'Rajdhani', sans-serif; /* Droite et technique pour le texte */
+    --font-tech: 'Share Tech Mono', monospace; /* Pour les compteurs et données */
 }
 
 body {
     background-color: var(--bg-color);
-    /* Création d'une grille Cyberpunk subtile */
-    background-image: 
-        linear-gradient(rgba(255, 77, 148, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 77, 148, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px; /* Taille des carreaux de la grille */
-    background-position: center center;
-    
+    background-image: radial-gradient(circle at 50% 0%, #1a1a24 0%, transparent 70%);
     color: var(--text-main);
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
-    min-height: 100vh; /* S'assure que le fond couvre tout l'écran */
+    min-height: 100vh;
+    position: relative; /* Nécessaire pour l'effet scanline */
+}
+
+/* L'effet Scanline (Lignes d'écran CRT) animées */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none; /* Empêche l'effet de bloquer tes clics */
+    z-index: 100; /* Se place au-dessus du fond, mais on le garde subtil */
+    animation: scanlineScroll 20s linear infinite;
+    opacity: 0.6;
 }
 
 /* --- NAVIGATION GLOBALE --- */
@@ -88,11 +112,147 @@ h1 {
     margin-bottom: 5px;
 }
 
+h1, h2, .nav-logo {
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+}
+
 .subtitle {
     color: #888;
     font-size: 0.9rem;
     margin-bottom: 40px;
 }
+
+
+/* --- TERMINAL DE BIENVENUE --- */
+.welcome-terminal {
+    background: rgba(18, 18, 26, 0.8);
+    border: 1px solid rgba(0, 243, 255, 0.15);
+    border-left: 4px solid var(--neon-cyan);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 1000px; /* Aligné avec ta grille en dessous */
+    margin: 0 auto 40px auto;
+    padding: 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    animation: fadeUp 0.8s ease-out; /* Réutilise ton animation d'entrée */
+    backdrop-filter: blur(5px);
+}
+
+.terminal-header {
+    background: rgba(0, 243, 255, 0.05);
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    color: var(--neon-cyan);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px 6px 0 0;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--neon-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--neon-cyan);
+    animation: pulseDot 2s infinite;
+}
+
+.terminal-body {
+    padding: 25px 30px;
+}
+
+.terminal-body h2 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.terminal-body p {
+    color: #a0a0b0;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.terminal-footer {
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    font-family: var(--font-tech);
+    font-size: 0.95rem;
+    display: flex;
+    gap: 30px;
+    border-radius: 0 0 6px 6px;
+}
+
+.cyan-text { color: var(--neon-cyan); }
+.pink-text { color: var(--neon-pink); }
+
+
+/* --- LORE CARD (Intégration AO3) --- */
+.lore-card {
+    grid-column: 1 / -1; /* Force la carte à prendre toute la largeur de la grille */
+    background: linear-gradient(135deg, #1a1a24 0%, #0d0d12 100%);
+    border-left: 4px solid var(--neon-pink);
+    padding: 25px 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.lore-content h2 {
+    margin: 0 0 10px 0;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.lore-content p {
+    margin: 0;
+    color: #aaa;
+    font-size: 0.95rem;
+    max-width: 600px;
+}
+
+.ao3-btn {
+    background-color: transparent;
+    color: var(--neon-cyan); /* Bascule sur le Cyan */
+    border: 1px solid var(--neon-cyan);
+    font-family: var(--font-tech);
+    text-transform: uppercase;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 4px; /* Angles plus vifs */
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+
+.ao3-btn:hover {
+    background-color: var(--neon-cyan);
+    color: #000; /* Texte noir sur fond néon pour un impact maximal */
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+/* Responsivité pour les petits écrans */
+@media (max-width: 768px) {
+    .lore-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .ao3-btn {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+
 
 .song-card {
     background-color: var(--card-bg);
@@ -261,9 +421,51 @@ audio {
 }
 
 .time-display {
-    font-size: 0.8rem;
-    color: #888;
-    min-width: 75px;
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    color: var(--neon-cyan); /* On utilise le Cyan ici pour la lisibilité technique */
+    min-width: 85px;
     text-align: right;
-    font-variant-numeric: tabular-nums; /* Empêche le texte de trembler quand les secondes défilent */
+}
+
+
+
+/* --- ANIMATIONS D'ENTRÉE --- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* On applique l'animation à toutes les cartes de la grille */
+.song-card, .release-card, .lore-card {
+    animation: fadeUp 0.6s ease-out forwards;
+    opacity: 0; /* État initial invisible */
+}
+
+/* On décale l'animation pour créer un effet de cascade visuelle (Stagger) */
+.song-card:nth-child(1) { animation-delay: 0.1s; }
+.song-card:nth-child(2) { animation-delay: 0.2s; }
+.song-card:nth-child(3) { animation-delay: 0.3s; }
+.song-card:nth-child(4) { animation-delay: 0.4s; }
+.song-card:nth-child(5) { animation-delay: 0.5s; }
+.song-card:nth-child(6) { animation-delay: 0.6s; }
+
+
+@keyframes scanlineScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -100vh; }
+}
+
+
+/* Animation du point de statut */
+@keyframes pulseDot {
+    0% { opacity: 0.5; box-shadow: 0 0 4px var(--neon-cyan); }
+    50% { opacity: 1; box-shadow: 0 0 12px var(--neon-cyan); }
+    100% { opacity: 0.5; box-shadow: 0 0 4px var(--neon-cyan); }
 }
