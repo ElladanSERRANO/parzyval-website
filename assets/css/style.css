@@ -81,3 +81,123 @@ audio {
     box-sizing: border-box; /* Assure que le padding ne casse pas la largeur */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+/* --- NOUVELLES RÈGLES POUR LE HUB (ACCUEIL) --- */
+
+.hub-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.release-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 77, 148, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    text-decoration: none; /* Enlève le soulignement du lien */
+    color: var(--text-main);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+}
+
+.release-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
+    border-color: var(--neon-pink);
+}
+
+.release-card.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Rend la carte incliquable */
+    border-color: transparent;
+}
+
+/* Zone temporaire en attendant tes images */
+.cover-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #0d0d12;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.release-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover; /* Force l'image à remplir le carré sans s'écraser */
+    border-radius: 8px; /* Adoucit les angles pour matcher avec la carte */
+    margin-bottom: 15px;
+    background-color: #0d0d12;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Donne de la profondeur */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Léger contour tech */
+}
+
+
+
+/* --- LECTEUR AUDIO CUSTOM --- */
+
+.custom-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #111118;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 15px 0 25px 0;
+    border: 1px solid rgba(255, 77, 148, 0.1);
+}
+
+.play-btn {
+    background: none;
+    border: none;
+    color: var(--neon-pink);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.2s, text-shadow 0.2s;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 10px rgba(255, 77, 148, 0.6);
+}
+
+.progress-container {
+    flex-grow: 1;
+    height: 6px;
+    background: #2a2a35;
+    border-radius: 3px;
+    cursor: pointer; /* Indique à l'utilisateur qu'il peut cliquer pour avancer */
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; /* Le JavaScript contrôlera cette largeur */
+    background: var(--neon-pink);
+    box-shadow: 0 0 8px var(--neon-pink);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+.time-display {
+    font-size: 0.8rem;
+    color: #888;
+    min-width: 75px;
+    text-align: right;
+    font-variant-numeric: tabular-nums; /* Empêche le texte de trembler quand les secondes défilent */
+}
