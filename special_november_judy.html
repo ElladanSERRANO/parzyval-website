@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EP - The March Of The Flawed</title>
+    <title>Corrupted Data</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -61,7 +61,7 @@
     <main class="ep-grid">
 
         <!-- Carte de Contexte / Lien AO3 -->
-        <div class="lore-card">
+        <div class="lore-card cinematic-card">
             <div class="lore-content">
                 <h2>J̶̧̰̺̤͈͕̳͆̃͊̀̏ͯ͒ͩ̚u_͊̽_̸̛̜̥̜̯ͣͪ̑̌̎ͤ̃͜ḓ͍y'̵̵̨͎̒̃̓́͘͝_̷̄ͣs_̴̟̌_̢̯ͭͮ͑̕͞ B̨͙͍͚͔͙̓̍ͤͦ͛͛̍͘î̷̡̠͙͕͔̩͎̼̺̣͍̙̌́͒̓̔̃̽́̂͒ͩ͘͜͝r̵̵̥̜̙̪ͫͧͩ̄͌͋ͨ̓̈ͤ͒̋͋͟͡t͈͚̝̪̿̈́̿h̸̘_̸̵̡̰̘̫ͣ̾ͭ̓̑ͨ̈́͋ͬͭ̇̀ͫ͐͂̿̍͢͟ͅd̄͆͘ä͕̼͍̺́̑ͦ͐̒̓͗̇͘͘̚͜ͅy̵̴̢̮̙̖͍̳͖̐͊͊ͥ́̉̄͠ S_̸̵͈̟̠͍̲͇̬͇͉̗̥͓͇̳̭͂ͬ̎̆̃͑̽̏́̑̎̒ͣ̿̈́ͨͦ̌ͦ̇̽̀͢͢͢͡ͅư̛̱̘̗̯̠̯̪ͩ̓̌ͪͧͤ͊͆̕r̸̪͌͟p̶̛̛͓̪̹̭̘̪͇̘̮̭͕̳͉ͨͧ̉̉̃ͧ̔ͧ̎ͧ́́͐ͣ̓̕͘͟͜͢ͅr̴̨̛͍̟͔̯ͦ͊̎ͤ̓͆͜͠͝_̨̼̘̻̼̤͈̥̘̤̀̂̈͋̇̊ͣ̆ͬ̂͘̚̚͢͜͜͞͞i̴̵̴̷̠̫̻̳̻̥̞͔̺͎̦͓ͭͮ͒̆̆̀͌ͧ̋͑͜͝s̯̥̠̭̞̔͆ͥ͡_̵̶͓̫͕̥̜̰͂̾̎͋̚̕͟͠ͅe͆̔</h2>
                 <p>C̢̙͈̯̈͜o̸̙̩͒̆͑̑́̈́̚͞_̸̡̨̜̤̱̭̻͉̞̻̤̘̟͒͒̿͆ͩ̔̾̏̇̿̇͒̅̕͝r̸̺͎̚̚͟r̲̟͓͉͔̦̬̩̠̱͍̎̀ͣͩͬ̑̒̀̇́̀̿ͩ̉̋͞͞ư̸͍̼̈ͬ͟͜p̮̍t̢̛̞̮̪̩̣̃̎̂̉̋̐ͮ̈_ͧͮ̀e̶͉d̯̝̪͉̻̤ͫͯͥ͆͌̕͢͟ D̵̵̢̹͓͎̗͈̤̝̗̣͓̣̝ͣ̽͛̈́̈̅ͯͮ͆̃̍̆͗͐͢_a̴̷̵̢̙̦̰͙͇̻̙̜̹̥̳̜͍̫͚ͯ͂̈̓ͯ̎̀̔͗̑̓͜͟͞͠͝͝t̶̡̡͎̥͉̘̜̔ͥ͑̌̉̚a̢͍͙̙͖̞̭̰͂̉ͣͮͯ̾̀̀ͪ͘</p>
@@ -141,6 +141,63 @@
 
     </main>
 
+
+    <!-- --- TERMINAL DES PAROLES (CACHÉ PAR DÉFAUT) --- -->
+    <div id="lyrics-overlay" class="lyrics-overlay">
+        <div class="lyrics-terminal">
+            <div class="lyrics-header">
+                <h3 id="lyrics-title">// DECIPHERED SONGSHARD DATA</h3>
+                <button id="close-lyrics" class="close-btn">✖</button>
+            </div>
+            <div class="lyrics-content" id="lyrics-text">
+                <!-- Le texte s'injectera ici -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- --- LECTEUR AUDIO GLOBAL (SPA HUD) --- -->
+    <div id="global-player" class="global-player">
+        
+        <!-- Bloc Gauche : Données de la piste -->
+        <div class="gp-info">
+            <div class="gp-cover-placeholder" id="gp-cover">
+                <span class="scan-line"></span>
+            </div>
+            <div class="gp-details">
+                <h4 id="gp-title">[ SIGNAL AWAITING ]</h4>
+                <p id="gp-artist">Standby system</p>
+            </div>
+        </div>
+        
+        <!-- Bloc Central : Moteur et Contrôles -->
+        <div class="gp-controls">
+            <div class="gp-buttons">
+                <button id="gp-prev" class="ctrl-btn">⏮</button>
+                <button id="gp-play" class="ctrl-btn play-main">▶</button>
+                <button id="gp-next" class="ctrl-btn">⏭</button>
+            </div>
+            <div class="gp-progress-wrapper">
+                <span id="gp-time-current">0:00</span>
+                <div class="gp-progress-container" id="gp-progress">
+                    <div class="gp-progress-bar" id="gp-bar"></div>
+                </div>
+                <span id="gp-time-total">0:00</span>
+            </div>
+        </div>
+        
+        <!-- Bloc Droit : Actions Avancées -->
+        <div class="gp-actions">
+            <!-- Le futur bouton qui déploiera le Datashard de texte -->
+            <button id="gp-lyrics-btn" class="action-btn disabled">
+                ACCESS DECIPHERED SONGSHARD DATA
+            </button>
+            
+            <!-- LE MOTEUR UNIQUE (Invisible) -->
+            <audio id="gp-audio-engine" src="" preload="metadata"></audio>
+        </div>
+    </div>
+
+    
     <!-- --- FOOTER GLOBAL : MANIFESTE & SOUTIEN --- -->
     <footer class="global-footer">
         <div class="footer-content">
@@ -166,6 +223,7 @@
         </div>
     </footer>
 
+    <script src="./assets/js/database.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

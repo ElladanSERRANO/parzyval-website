@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Suno Hub | Parzyval</title>
+    <title>Baguette_Sadique Emporium | Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -74,6 +74,23 @@
         </div>
     </section>
 
+    <!-- --- VISUAL LOGS (VITRINE DE L'UNIVERS) --- -->
+    <section class="visual-logs-section">
+        <h3 class="logs-title"></h3>
+        <div class="logs-grid">
+            
+            <!-- Fragment 1 (Toujours visible) -->
+            <div class="log-item" style="background-image: url('./assets/img/global/ambiance1.jpg');"></div>
+            
+            <!-- Fragment 2 (Disparaît sur téléphone) -->
+            <div class="log-item hide-on-mobile" style="background-image: url('./assets/img/global/ambiance2.png');"></div>
+            
+            <!-- Fragment 3 (Disparaît sur tablette et téléphone) -->
+            <div class="log-item hide-on-tablet" style="background-image: url('./assets/img/global/ambiance3.png');"></div>
+        </div>
+        <h3 class="logs-title"></h3>
+    </section>
+
 
     <main class="hub-grid">
 
@@ -107,6 +124,64 @@
     </main>
 
 
+    <!-- --- TERMINAL DES PAROLES (CACHÉ PAR DÉFAUT) --- -->
+    <div id="lyrics-overlay" class="lyrics-overlay">
+        <div class="lyrics-terminal">
+            <div class="lyrics-header">
+                <h3 id="lyrics-title">// DECIPHERED SONGSHARD DATA</h3>
+                <button id="close-lyrics" class="close-btn">✖</button>
+            </div>
+            <div class="lyrics-content" id="lyrics-text">
+                <!-- Le texte s'injectera ici -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- --- LECTEUR AUDIO GLOBAL (SPA HUD) --- -->
+    <div id="global-player" class="global-player">
+        
+        <!-- Bloc Gauche : Données de la piste -->
+        <div class="gp-info">
+            <div class="gp-cover-placeholder" id="gp-cover">
+                <span class="scan-line"></span>
+            </div>
+            <div class="gp-details">
+                <h4 id="gp-title">[ SIGNAL AWAITING ]</h4>
+                <p id="gp-artist">Standby system</p>
+            </div>
+        </div>
+        
+        <!-- Bloc Central : Moteur et Contrôles -->
+        <div class="gp-controls">
+            <div class="gp-buttons">
+                <button id="gp-prev" class="ctrl-btn">⏮</button>
+                <button id="gp-play" class="ctrl-btn play-main">▶</button>
+                <button id="gp-next" class="ctrl-btn">⏭</button>
+            </div>
+            <div class="gp-progress-wrapper">
+                <span id="gp-time-current">0:00</span>
+                <div class="gp-progress-container" id="gp-progress">
+                    <div class="gp-progress-bar" id="gp-bar"></div>
+                </div>
+                <span id="gp-time-total">0:00</span>
+            </div>
+        </div>
+        
+        <!-- Bloc Droit : Actions Avancées -->
+        <div class="gp-actions">
+            <!-- Le futur bouton qui déploiera le Datashard de texte -->
+            <button id="gp-lyrics-btn" class="action-btn disabled">
+                ACCESS DECIPHERED SONGSHARD DATA
+            </button>
+            
+            <!-- LE MOTEUR UNIQUE (Invisible) -->
+            <audio id="gp-audio-engine" src="" preload="metadata"></audio>
+        </div>
+    </div>
+
+
+
     <!-- --- FOOTER GLOBAL : MANIFESTE & SOUTIEN --- -->
     <footer class="global-footer">
         <div class="footer-content">
@@ -131,5 +206,7 @@
             <p>Baguette_Sadique / Parzyval © 2026-2080. Not affiliated with CD Projekt Red. Secure Transfer Protocol.</p>
         </div>
     </footer>
+    <script src="./assets/js/database.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>

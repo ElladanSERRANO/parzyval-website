@@ -264,6 +264,70 @@ h1, h2, .nav-logo {
     border-radius: 0 0 6px 6px;
 }
 
+/* --- VISUAL LOGS (GRILLE D'ACCUEIL) --- */
+
+.visual-logs-section {
+    width: 100%; /* ORDRE ABSOLU : Force l'expansion maximale */
+    max-width: 1200px;
+    margin: 60px auto 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box; /* Protège le calcul de la largeur */
+}
+
+.logs-title {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espace entre le texte et la ligne automatique */
+    color: var(--neon-cyan);
+    font-family: var(--font-tech);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    white-space: nowrap; /* Interdit au texte de se casser sur deux lignes */
+}
+
+/* Le Moteur de Ligne Automatique */
+.logs-title::after {
+    content: "";
+    flex-grow: 1; /* Ordre de s'étendre sur tout l'espace libre restant */
+    height: 2px;
+    /* Dessine une ligne hachurée cyberpunk */
+    background: repeating-linear-gradient(90deg, var(--neon-cyan) 0, var(--neon-cyan) 4px, transparent 4px, transparent 8px);
+    opacity: 0.3;
+}
+
+.logs-grid {
+    display: grid;
+    /* Crée 3 colonnes de largeur égale par défaut */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.log-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    
+    /* NOUVEAU FILTRE : Légèrement assombri, mais garde les couleurs */
+    filter: contrast(110%);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: crosshair;
+}
+
+.log-item:hover {
+    /* NOUVEL ÉTAT ACTIF : Éclat naturel et netteté absolue */
+    filter: brightness(1.1) contrast(100%);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.2);
+    transform: translateY(-5px);
+}
+
 .cyan-text { color: var(--neon-cyan); }
 .pink-text { color: var(--neon-pink); }
 
@@ -314,6 +378,66 @@ h1, h2, .nav-logo {
     color: #000; /* Texte noir sur fond néon pour un impact maximal */
     box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
 }
+
+/* --- CARTE CINÉMATIQUE (HOLOGRAMME MÉMORIEL) --- */
+
+.cinematic-card {
+    position: relative;
+    overflow: hidden;
+    background: transparent; /* Désactive le fond gris uni d'origine */
+    border-color: rgba(255, 77, 148, 0.4);
+}
+
+/* Les Couches d'Images */
+.holo-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: 50% 25%;
+    opacity: 0; /* Cachées par défaut */
+    z-index: 0;
+}
+
+/* L'injection temporelle (Décalage parfait des 3 images) */
+.holo-1 { animation: holoCrossfade 18s linear infinite 0s; }
+.holo-2 { animation: holoCrossfade 18s linear infinite 6s; }
+.holo-3 { animation: holoCrossfade 18s linear infinite 12s; }
+
+/* Le Filtre de Sécurité (Dégradé + Lignes de Scan) */
+.holo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dégradé : Noir profond à gauche sous le texte, se dissipe en cyan transparent à droite */
+    background: linear-gradient(90deg, rgba(13, 13, 18, 1) 0%, rgba(13, 13, 18, 0.8) 45%, rgba(0, 243, 255, 0.05) 100%);
+    z-index: 1;
+}
+
+/* Lignes de scan diégétiques (Terminal Cathodique) */
+.holo-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.4) 2px, rgba(0, 0, 0, 0.4) 4px);
+    pointer-events: none;
+}
+
+/* On verrouille le texte et les boutons au premier plan */
+.cinematic-card .lore-content,
+.cinematic-card .lore-actions {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8); /* Renforce le contraste du texte */
+}
+
 
 /* Responsivité pour les petits écrans */
 @media (max-width: 768px) {
@@ -665,6 +789,286 @@ audio {
 }
 
 
+/* --- TERMINAL DES PAROLES (OVERLAY) --- */
+.lyrics-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Prend tout l'écran */
+    background: rgba(5, 5, 8, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 3000; /* Au-dessus du lecteur HUD (z-index: 2000) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none; /* Inactif quand caché */
+    transition: opacity 0.3s ease;
+}
+
+.lyrics-overlay.active {
+    opacity: 1;
+    pointer-events: auto; /* Devient cliquable */
+}
+
+.lyrics-terminal {
+    width: 90%;
+    max-width: 800px;
+    height: 80vh;
+    background: #0a0a0f;
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 0 40px rgba(0, 243, 255, 0.15);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.lyrics-overlay.active .lyrics-terminal {
+    transform: translateY(0);
+}
+
+.lyrics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: rgba(0, 243, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.lyrics-header h3 {
+    color: var(--neon-cyan);
+    margin: 0;
+    font-family: var(--font-tech);
+    letter-spacing: 2px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--neon-pink);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s, text-shadow 0.2s;
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.lyrics-content {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto; /* Permet le scroll interne */
+    font-size: 1.3rem; /* Grand format type Spotify */
+    line-height: 1.8;
+    color: #e0e0e0;
+    font-family: var(--font-body);
+    white-space: pre-wrap; /* CRUCIAL : Respecte tes sauts de ligne du Datashard JS */
+}
+
+/* Cache la barre de scroll pour un look plus épuré (optionnel) */
+.lyrics-content::-webkit-scrollbar {
+    width: 8px;
+}
+.lyrics-content::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+
+
+/* --- LECTEUR AUDIO GLOBAL (HUD) --- */
+.global-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(8, 8, 12, 0.95);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(0, 243, 255, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    z-index: 2000; /* Force le lecteur à rester au-dessus de tout */
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* BLOC GAUCHE : INFOS */
+.gp-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 25%;
+}
+
+.gp-cover-placeholder {
+    width: 50px;
+    height: 50px;
+    background: #1a1a24;
+    border: 1px solid rgba(255, 77, 148, 0.3);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0; /* ORDRE ABSOLU : Ne jamais compresser cette boîte */
+}
+
+/* Effet de scan sur la couverture vide */
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--neon-cyan);
+    opacity: 0.5;
+    animation: coverScan 2s linear infinite;
+}
+
+.gp-details h4 {
+    margin: 0 0 5px 0;
+    font-family: var(--font-tech);
+    color: var(--neon-cyan);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    white-space: nowrap; /* Interdit au texte de passer à la ligne */
+    overflow: hidden; /* Cache ce qui dépasse */
+    text-overflow: ellipsis; /* Ajoute "..." si le titre est trop long */
+}
+
+.gp-details {
+    min-width: 0; /* Requis par Flexbox pour autoriser la troncature du texte */
+}
+
+.gp-details p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* BLOC CENTRAL : CONTRÔLES */
+.gp-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+}
+
+.gp-buttons {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ctrl-btn:hover {
+    color: var(--text-main);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.play-main {
+    color: var(--neon-pink);
+    font-size: 1.8rem;
+}
+
+.play-main:hover {
+    color: var(--neon-pink);
+    transform: scale(1.1);
+    text-shadow: 0 0 15px var(--neon-pink);
+}
+
+.gp-progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.gp-progress-container {
+    flex-grow: 1;
+    height: 6px;
+    background: #2a2a35;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.gp-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+    border-radius: 3px;
+    pointer-events: none;
+    transition: width 0.1s linear;
+}
+
+#gp-time-current, #gp-time-total {
+    font-family: var(--font-tech);
+    font-size: 0.85rem;
+    color: #888;
+    min-width: 45px;
+}
+
+/* BLOC DROIT : ACTIONS */
+.gp-actions {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: #444;
+    padding: 8px 15px;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    border-radius: 4px;
+    cursor: not-allowed;
+    letter-spacing: 1px;
+}
+
+/* Quand les paroles seront actives plus tard */
+.action-btn.active {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.action-btn.active:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+/* Règle de protection pour ne pas que le footer soit caché par le lecteur */
+body {
+    padding-bottom: 90px;
+}
+
+
+
 /* --- FOOTER GLOBAL (MANIFESTE & DONS) --- */
 .global-footer {
     width: 100%;
@@ -815,6 +1219,21 @@ audio {
     75% { transform: translateX(1px); }
 }
 
+
+@keyframes coverScan {
+    0% { top: -5px; }
+    100% { top: 55px; }
+}
+
+/* Le Moteur de Crossfade (Cycle de 18s) */
+@keyframes holoCrossfade {
+    0% { opacity: 1; filter: grayscale(20%) contrast(110%); } /* Effet brut, légèrement désaturé */
+    25% { opacity: 1; }
+    33% { opacity: 0; }
+    92% { opacity: 0; }
+    100% { opacity: 1; filter: grayscale(20%) contrast(110%); }
+}
+
 /* =========================================
    RESPONSIVITÉ STRICTE (MOBILES & TABLETTES)
    S'active uniquement sous 768px de largeur
@@ -907,5 +1326,92 @@ audio {
     .time-display {
         min-width: 75px; /* Réduit un peu l'espace réservé au temps */
         font-size: 0.8rem;
+    }
+}
+
+/* --- MUTATION MOBILE DU LECTEUR GLOBAL --- */
+@media (max-width: 768px) {
+    .global-player {
+        flex-direction: column; /* Empile les éléments verticalement */
+        padding: 12px 15px;
+        gap: 12px;
+    }
+
+    /* Ligne 1 : Titre au centre, Cover éliminée */
+    .gp-info {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    .gp-cover-placeholder {
+        display: none; /* Disparition totale de l'image */
+    }
+    .gp-details h4 {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+    }
+
+    /* Ligne 2 : Moteur et Barre de progression */
+    .gp-controls {
+        width: 100%;
+        gap: 8px;
+    }
+    .gp-progress-wrapper {
+        max-width: 100%;
+    }
+
+    /* Ligne 3 : Terminal des paroles */
+    .gp-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    .action-btn {
+        width: 100%; /* Le bouton prend toute la largeur */
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Ajustement de sécurité : On empêche le lecteur empilé de cacher le footer */
+    body {
+        padding-bottom: 160px;
+    }
+}
+
+/* Adaptation du Terminal Paroles pour mobile */
+@media (max-width: 768px) {
+    .lyrics-terminal {
+        width: 95%;
+        height: 85vh;
+    }
+    .lyrics-header {
+        padding: 15px 20px;
+    }
+    .lyrics-header h3 {
+        font-size: 0.9rem;
+    }
+    .lyrics-content {
+        padding: 20px;
+        font-size: 1rem; /* Réduit la taille de police pour téléphone */
+    }
+}
+
+
+/* 1. TABLETTE : On passe à 2 colonnes et on supprime la 3ème image */
+@media (max-width: 1024px) {
+    .logs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hide-on-tablet {
+        display: none;
+    }
+}
+
+/* 2. MOBILE : On passe à 1 colonne, on supprime la 2ème image, et on réduit la hauteur */
+@media (max-width: 768px) {
+    .logs-grid {
+        grid-template-columns: 1fr;
+    }
+    .hide-on-mobile {
+        display: none;
     }
 }

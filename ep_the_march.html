@@ -61,10 +61,20 @@
     <main class="ep-grid">
 
         <!-- Carte de Contexte / Lien AO3 -->
-        <div class="lore-card">
+        <div class="lore-card cinematic-card">
+
+            <!-- 1. Le Moteur Holographique (Les 3 couches d'images) -->
+            <div class="holo-layer holo-1" style="background-image: url('./assets/img/march_flawed/img1.png');"></div>
+            <div class="holo-layer holo-2" style="background-image: url('./assets/img/march_flawed/img2.png');"></div>
+            <div class="holo-layer holo-3" style="background-image: url('./assets/img/march_flawed/img3.png');"></div>
+
+            <!-- 2. Le Filtre Optique (Le voile protecteur) -->
+            <div class="holo-overlay"></div>
+
+            <!-- 3. Ton contenu actuel (Il passe au premier plan) -->
             <div class="lore-content">
                 <h2>The March of the Flawed</h2>
-                <p>EP released in October 2080, celebrating the battle waged by Valerie, Lexa, Nikola, and their followers against Bianca Sheppard’s relentless media attacks.</p>
+                <p>EP released in October 2080, celebrating the battle waged by Valerie, Lexa, Nikola, and their followers against Bianca Sheppard's relentless media attacks.</p>
             </div>
             <div class="lore-actions" style="display: flex; flex-direction: column; gap: 10px;">
                 <a href="https://archiveofourown.org/works/69845721/chapters/222729681" target="_blank" class="ao3-btn">
@@ -78,7 +88,7 @@
         </div>
 
 
-        <div class="song-card">
+        <div class="song-card" data-cover="./assets/img/covers/march_flawed_cover.jpg">
             <h2>Bones of the Hopeless</h2>
             
             <div class="custom-player">
@@ -100,7 +110,7 @@
             </a>
         </div>
 
-        <div class="song-card">
+        <div class="song-card" data-cover="./assets/img/covers/march_flawed_cover.jpg">
             <h2>Kings And Queens Of Flaws</h2>
             
             <div class="custom-player">
@@ -122,7 +132,7 @@
             </a>
         </div>
 
-        <div class="song-card">
+        <div class="song-card" data-cover="./assets/img/covers/march_flawed_cover.jpg">
             <h2>Kinetic Creed</h2>
             
             <div class="custom-player">
@@ -144,7 +154,7 @@
             </a>
         </div>
 
-        <div class="song-card">
+        <div class="song-card" data-cover="./assets/img/covers/march_flawed_cover.jpg">
             <h2>Through The Heart Of The Wicked</h2>
             
             <div class="custom-player">
@@ -166,7 +176,7 @@
             </a>
         </div>
 
-        <div class="song-card">
+        <div class="song-card" data-cover="./assets/img/covers/march_flawed_cover.jpg">
             <h2>A Glass For The Wounded Spirits</h2>
             
             <div class="custom-player">
@@ -188,7 +198,7 @@
             </a>
         </div>
 
-        <div class="song-card">
+        <div class="song-card" data-cover="./assets/img/covers/march_flawed_cover.jpg">
             <h2>The Mathematical Inevitability Of An Empty Room</h2>
             
             <div class="custom-player">
@@ -211,6 +221,63 @@
         </div>
 
     </main>
+
+
+    <!-- --- TERMINAL DES PAROLES (CACHÉ PAR DÉFAUT) --- -->
+    <div id="lyrics-overlay" class="lyrics-overlay">
+        <div class="lyrics-terminal">
+            <div class="lyrics-header">
+                <h3 id="lyrics-title">// DECIPHERED SONGSHARD DATA</h3>
+                <button id="close-lyrics" class="close-btn">✖</button>
+            </div>
+            <div class="lyrics-content" id="lyrics-text">
+                <!-- Le texte s'injectera ici -->
+            </div>
+        </div>
+    </div>
+
+    <!-- --- LECTEUR AUDIO GLOBAL (SPA HUD) --- -->
+    <div id="global-player" class="global-player">
+        
+        <!-- Bloc Gauche : Données de la piste -->
+        <div class="gp-info">
+            <div class="gp-cover-placeholder" id="gp-cover">
+                <span class="scan-line"></span>
+            </div>
+            <div class="gp-details">
+                <h4 id="gp-title">[ SIGNAL AWAITING ]</h4>
+                <p id="gp-artist">Standby system</p>
+            </div>
+        </div>
+        
+        <!-- Bloc Central : Moteur et Contrôles -->
+        <div class="gp-controls">
+            <div class="gp-buttons">
+                <button id="gp-prev" class="ctrl-btn">⏮</button>
+                <button id="gp-play" class="ctrl-btn play-main">▶</button>
+                <button id="gp-next" class="ctrl-btn">⏭</button>
+            </div>
+            <div class="gp-progress-wrapper">
+                <span id="gp-time-current">0:00</span>
+                <div class="gp-progress-container" id="gp-progress">
+                    <div class="gp-progress-bar" id="gp-bar"></div>
+                </div>
+                <span id="gp-time-total">0:00</span>
+            </div>
+        </div>
+        
+        <!-- Bloc Droit : Actions Avancées -->
+        <div class="gp-actions">
+            <!-- Le futur bouton qui déploiera le Datashard de texte -->
+            <button id="gp-lyrics-btn" class="action-btn disabled">
+                ACCESS DECIPHERED SONGSHARD DATA
+            </button>
+            
+            <!-- LE MOTEUR UNIQUE (Invisible) -->
+            <audio id="gp-audio-engine" src="" preload="metadata"></audio>
+        </div>
+    </div>
+
 
     <!-- --- FOOTER GLOBAL : MANIFESTE & SOUTIEN --- -->
     <footer class="global-footer">
@@ -237,7 +304,7 @@
         </div>
     </footer>
 
-
+    <script src="./assets/js/database.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
