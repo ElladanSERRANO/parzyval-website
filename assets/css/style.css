@@ -100,6 +100,83 @@ body::before {
     pointer-events: none;
 }
 
+/* --- MENUS DÉROULANTS (DROPDOWNS) --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    cursor: pointer;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s;
+}
+
+.dropbtn:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px rgba(255, 77, 148, 0.4);
+}
+
+.chevron {
+    font-size: 0.6rem;
+    color: var(--neon-cyan);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: rgba(13, 13, 18, 0.95);
+    backdrop-filter: blur(10px);
+    min-width: 220px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--neon-pink);
+    border-radius: 6px; /* On referme la bordure en haut */
+    z-index: 1001;
+    top: 100%; 
+    right: 0; /* CRUCIAL : Force le menu à s'étendre vers la gauche, dans l'écran */
+    margin-top: 15px; 
+}
+
+.dropdown-content::before {
+    content: "";
+    position: absolute;
+    top: -15px; /* Doit être exactement l'inverse du margin-top */
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: transparent;
+}
+
+.dropdown-content a {
+    color: var(--text-main);
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 77, 148, 0.1);
+    color: var(--neon-pink);
+    padding-left: 25px; /* Micro-animation de décalage très tech */
+}
+
+/* Affichage du menu au survol */
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeUp 0.2s ease-out forwards; /* Réutilise ton animation existante */
+}
+
+
 /* On ajuste le header de page pour ne pas être collé à la nav */
 .page-header {
     margin-top: 40px;
@@ -586,6 +663,87 @@ audio {
     text-transform: uppercase;
     cursor: not-allowed;
 }
+
+
+/* --- FOOTER GLOBAL (MANIFESTE & DONS) --- */
+.global-footer {
+    width: 100%;
+    background: #0a0a0f;
+    border-top: 1px solid rgba(0, 243, 255, 0.15); /* Ligne cyan très fine */
+    margin-top: 80px; /* Espace pour respirer après les musiques */
+    padding: 50px 20px 20px 20px;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.footer-section {
+    flex: 1;
+}
+
+.footer-section h3 {
+    color: var(--neon-cyan);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.footer-section p {
+    color: #888;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+/* Le bouton Ko-fi stylisé */
+.kofi-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--neon-pink);
+    border: 1px solid var(--neon-pink);
+    padding: 12px 25px;
+    font-family: var(--font-tech);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.kofi-btn:hover {
+    background: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 20px rgba(255, 77, 148, 0.4);
+}
+
+.footer-legal {
+    max-width: 1000px;
+    margin: 50px auto 0 auto;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: #444;
+    font-size: 0.8rem;
+    font-family: var(--font-tech);
+}
+
+/* Ajout à tes @media queries pour le mobile (en bas de ton fichier CSS) */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
+
 
 @keyframes blinkWarning {
     0%, 100% { opacity: 1; }
