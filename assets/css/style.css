@@ -1139,6 +1139,151 @@ body {
     font-family: var(--font-tech);
 }
 
+
+
+
+/* =========================================
+   SPECIAL : KINETIC CREED ARCHIVE (BRUTAL UI)
+========================================= */
+
+/* --- 1. LE VACCIN ANTI-CONFLIT --- */
+/* Neutralise le style par défaut de .song-card et de ses éléments internes sur cette page */
+.kinetic-archive .song-card.brutal-cut {
+    background: #0a0303 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    border-left: 8px solid #ff003c !important;
+    max-width: 100% !important;
+}
+
+.kinetic-archive .song-card .custom-player {
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.kinetic-archive .song-card h2 {
+    text-align: left !important;
+}
+
+/* --- 2. ARCHITECTURE GÉNÉRALE --- */
+.kinetic-archive {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto 100px auto;
+}
+
+.danger-text { color: #ff003c !important; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5); letter-spacing: 4px; }
+.brutal-title::after { background: repeating-linear-gradient(90deg, #ff003c 0, #ff003c 4px, transparent 4px, transparent 8px); opacity: 0.5; }
+.brutal-title { color: #ff003c; margin-bottom: 40px; font-size: 1.5rem; }
+
+/* La découpe Cyberpunk */
+.brutal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+}
+
+/* --- 3. LA RELIQUE (Format Géant) --- */
+.kinetic-archive .relic-card.song-card {
+    display: flex !important;
+    flex-direction: row !important; /* Force l'alignement horizontal sur PC */
+    gap: 50px;
+    padding: 40px !important;
+    margin-bottom: 80px !important;
+    box-shadow: 20px 20px 0 rgba(255, 0, 60, 0.05);
+}
+
+.relic-visual {
+    flex: 0 0 45%; 
+    position: relative;
+}
+
+.relic-badge {
+    position: absolute;
+    top: -10px; left: -10px;
+    background: #ff003c; color: #000;
+    font-family: var(--font-tech); font-size: 1.1rem; font-weight: bold;
+    padding: 10px 20px; z-index: 2;
+}
+
+.relic-cover-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    filter: contrast(120%) saturate(110%);
+    border: 1px solid rgba(255, 0, 60, 0.3);
+}
+
+.relic-data {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.relic-data h2 { font-size: 3rem !important; color: #fff !important; margin-bottom: 30px !important; text-transform: uppercase; }
+
+/* Lecteurs Brutalistes */
+.brutal-player .progress-bar, .brutal-player-mini .progress-bar { background: #ff003c; box-shadow: 0 0 15px #ff003c; }
+.brutal-player .play-btn, .brutal-player-mini .play-btn { color: #ff003c !important; border-color: #ff003c !important; }
+.brutal-player .play-btn:hover, .brutal-player-mini .play-btn:hover { background: #ff003c !important; color: #000 !important; }
+.brutal-btn, .brutal-btn-mini { border: 1px solid #ff003c; color: #ff003c; background: transparent; text-transform: uppercase; text-align: center; }
+.brutal-btn:hover, .brutal-btn-mini:hover { background: #ff003c; color: #000; }
+
+/* --- 4. LES MUTATIONS --- */
+.mutations-brutal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+}
+
+.kinetic-archive .mutation-card.song-card {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px;
+    padding: 20px !important;
+    margin: 0 !important;
+}
+
+.mutation-cover-img {
+    flex: 0 0 160px;
+    height: 160px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 0, 60, 0.3);
+}
+
+.mutation-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mutation-header h2 { font-size: 1.3rem !important; margin: 5px 0 !important; color: #fff !important; }
+.mutation-id { font-family: var(--font-tech); color: #ff003c; font-size: 1rem; letter-spacing: 2px; }
+.mutation-artist { font-size: 0.85rem; color: #888; text-transform: uppercase; }
+
+.mutation-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.brutal-player-mini { margin: 0; flex-grow: 1; margin-right: 15px; }
+.brutal-player-mini .time-display { display: none; }
+.brutal-btn-mini { padding: 10px 15px; font-size: 0.9rem; }
+
+/* --- 5. ADAPTATION MOBILE EXTRÊME --- */
+@media (max-width: 768px) {
+    .kinetic-archive .relic-card.song-card { flex-direction: column !important; padding: 20px !important; }
+    .kinetic-archive .mutation-card.song-card { flex-direction: column !important; }
+    .mutation-cover-img { flex: 0 0 auto; width: 100%; aspect-ratio: 16/9; }
+}
+
+
+
+
 /* Ajout à tes @media queries pour le mobile (en bas de ton fichier CSS) */
 @media (max-width: 768px) {
     .footer-content {
