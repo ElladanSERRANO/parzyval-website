@@ -1,0 +1,76 @@
+---
+permalink: "special_kinetic_creed.html"
+---
+{% extends "layouts/base.njk" %}
+
+{% block title %}{{ catalog.kinetic.title }}{% endblock %}
+
+{% block header %}
+    <header class="page-header brutal-header">
+        <h1>// KINETIC CREED_ARCHIVE</h1>
+        <p class="subtitle danger-text">WARNING: HIGH DECIBEL EXPOSURE</p>
+    </header>
+{% endblock %}
+
+{% block main %}
+<main class="kinetic-archive">
+        {# Les pistes de cette page sont décrites dans src/_data/releases.json (entrée "kinetic-creed") #}
+        {% set relic = catalog.kinetic.relic %}
+
+        <!-- LA RELIQUE (Piste Originale) -->
+        <section class="relic-section">
+            <div class="relic-card brutal-cut song-card" data-cover="{{ relic.coverUrl }}"{% if relic.lyricsUrl %} data-lyrics="{{ relic.lyricsUrl }}"{% endif %}>
+
+                <div class="relic-visual">
+                    <div class="relic-badge">{{ relic.badge }}</div>
+                    <img src="{{ relic.coverUrl }}" class="relic-cover-img" alt="Relic Cover">
+                </div>
+
+                <div class="relic-data">
+                    <h2>{{ relic.title }}</h2>
+                    <span class="mutation-artist">{{ relic.blurb }}</span>
+
+                    <div class="custom-player brutal-player">
+                        <audio id="audio-relic" src="{{ relic.src }}" preload="metadata"></audio>
+                        <button class="play-btn" data-target="audio-relic">▶</button>
+                        <div class="progress-container" id="container-relic"><div class="progress-bar" id="progress-relic"></div></div>
+                        <span class="time-display" id="time-relic">0:00 / 0:00</span>
+                    </div>
+
+                    <a href="{{ relic.src }}" class="download-btn brutal-btn" download="{{ relic.download }}">{{ relic.downloadLabel }}</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LES MUTATIONS (Grille Massive) -->
+        <section class="mutations-section">
+            <h3 class="logs-title brutal-title">// IDENTIFIED MUTATIONS</h3>
+
+            <div class="mutations-brutal-grid">
+                {% for m in catalog.kinetic.mutations %}
+                <div class="mutation-card brutal-cut song-card" data-cover="{{ m.coverUrl }}"{% if m.lyricsUrl %} data-lyrics="{{ m.lyricsUrl }}"{% endif %}>
+                    <img src="{{ m.coverUrl }}" class="mutation-cover-img" alt="Mutation Cover">
+
+                    <div class="mutation-body">
+                        <div class="mutation-header">
+                            <span class="mutation-id">{{ m.mutationId }}</span>
+                            <h2>{{ m.title }}</h2>
+                            <span class="mutation-artist">{{ m.blurb }}</span>
+                        </div>
+
+                        <div class="mutation-actions">
+                            <div class="custom-player brutal-player-mini">
+                                <audio id="audio-m{{ loop.index }}" src="{{ m.src }}" preload="metadata"></audio>
+                                <button class="play-btn" data-target="audio-m{{ loop.index }}">▶</button>
+                            </div>
+                            <a href="{{ m.src }}" class="download-btn brutal-btn-mini" download="{{ m.download }}">↓ MP3</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

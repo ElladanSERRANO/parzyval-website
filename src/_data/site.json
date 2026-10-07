@@ -1,0 +1,21 @@
+{
+  "audioBase": "https://pub-5d34ae86976c44bdb509f5fa15b99126.r2.dev/media/",
+  "navGroups": [
+    {
+      "id": "ep",
+      "label": "EPs"
+    },
+    {
+      "id": "album",
+      "label": "Albums"
+    },
+    {
+      "id": "live",
+      "label": "Live"
+    },
+    {
+      "id": "special",
+      "label": "Specials"
+    }
+  ]
+}

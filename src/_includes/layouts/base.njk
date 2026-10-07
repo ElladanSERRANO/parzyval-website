@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+    {% include "partials/nav.njk" %}
+
+{% block header %}
+<header class="page-header">
+    <h1>Baguette_Sadique / Parzyval Audio Hub</h1>
+    <p class="subtitle">Soundtracks for the Cyberpunk universe</p>
+</header>
+{% endblock %}
+
+{# Emplacement réservé au terminal d'accueil (page d'accueil uniquement) #}
+{% block afterHeader %}{% endblock %}
+
+    {# La bande d'images d'ambiance est affichée sur toutes les pages #}
+    {% include "partials/ambiance.njk" %}
+
+{% block main %}{% endblock %}
+
+    {% include "partials/lyrics-overlay.njk" %}
+
+    {% include "partials/player.njk" %}
+
+    {% include "partials/footer.njk" %}
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+---
+pagination:
+  data: catalog.pages
+  size: 1
+  alias: release
+permalink: "{{ release.file }}"
+---
+{% extends "layouts/base.njk" %}
+{% from "partials/macros.njk" import songCard %}
+
+{% block title %}{{ release.title }}{% endblock %}
+
+{% block main %}
+    <main class="ep-grid">
+
+        <!-- Carte de Contexte / Liens AO3 -->
+        <div class="lore-card cinematic-card">
+
+            <!-- Moteur holographique : jusqu'à 3 couches d'images -->
+            {% for url in release.lore.holoUrls %}
+            <div class="holo-layer holo-{{ loop.index }}" style="background-image: url('{{ url }}');"></div>
+            {% endfor %}
+
+            <!-- Filtre optique -->
+            <div class="holo-overlay"></div>
+
+            <div class="lore-content">
+                <h2>{{ release.lore.title }}</h2>
+                <p>{{ release.lore.text }}</p>
+            </div>
+            <div class="lore-actions" style="display: flex; flex-direction: column; gap: 10px;">
+                {% for link in release.lore.links %}
+                <a href="{{ link.url }}" target="_blank" class="ao3-btn">
+                    📖 {{ link.label }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% for t in release.tracks %}
+        {{ songCard(t, loop.index) }}
+        {% endfor %}
+
+    </main>
+{% endblock %}

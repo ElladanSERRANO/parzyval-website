@@ -1,0 +1,19 @@
+<nav class="global-nav">
+        <div class="nav-logo">
+            <a href="./index.html">Baguette_Sadique/Parzyval <span>Hub</span></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="./index.html">Accueil</a></li>
+            {# Le menu est généré automatiquement à partir de src/_data/releases.json #}
+            {% for group in catalog.navGroups %}{% if group.items.length %}
+            <li class="dropdown">
+                <span class="dropbtn">{{ group.label }} <span class="chevron">▼</span></span>
+                <div class="dropdown-content">
+                    {% for item in group.items %}
+                    <a href="./{{ item.file }}">{{ item.navLabel }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+            {% endif %}{% endfor %}
+        </ul>
+    </nav>

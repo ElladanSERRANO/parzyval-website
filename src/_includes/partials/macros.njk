@@ -1,0 +1,19 @@
+{# Carte d'une piste (pages EP / Album / Live / Special). n = numéro de la piste dans la page #}
+{% macro songCard(t, n) %}
+        <div class="song-card" data-cover="{{ t.coverUrl }}"{% if t.lyricsUrl %} data-lyrics="{{ t.lyricsUrl }}"{% endif %}>
+            <h2>{{ t.title }}</h2>
+
+            <div class="custom-player">
+                <audio id="audio-{{ n }}" src="{{ t.src }}" preload="metadata"></audio>
+                <button class="play-btn" data-target="audio-{{ n }}">▶</button>
+                <div class="progress-container" id="container-{{ n }}">
+                    <div class="progress-bar" id="progress-{{ n }}"></div>
+                </div>
+                <span class="time-display" id="time-{{ n }}">0:00 / 0:00</span>
+            </div>
+
+            <a href="{{ t.src }}" class="download-btn" download="{{ t.download }}">
+                ↓ Download MP3
+            </a>
+        </div>
+{% endmacro %}

@@ -1,0 +1,41 @@
+<!-- --- LECTEUR AUDIO GLOBAL (SPA HUD) --- -->
+    <div id="global-player" class="global-player">
+        
+        <!-- Bloc Gauche : Données de la piste -->
+        <div class="gp-info">
+            <div class="gp-cover-placeholder" id="gp-cover">
+                <span class="scan-line"></span>
+            </div>
+            <div class="gp-details">
+                <h4 id="gp-title">[ SIGNAL AWAITING ]</h4>
+                <p id="gp-artist">Standby system</p>
+            </div>
+        </div>
+        
+        <!-- Bloc Central : Moteur et Contrôles -->
+        <div class="gp-controls">
+            <div class="gp-buttons">
+                <button id="gp-prev" class="ctrl-btn">⏮</button>
+                <button id="gp-play" class="ctrl-btn play-main">▶</button>
+                <button id="gp-next" class="ctrl-btn">⏭</button>
+            </div>
+            <div class="gp-progress-wrapper">
+                <span id="gp-time-current">0:00</span>
+                <div class="gp-progress-container" id="gp-progress">
+                    <div class="gp-progress-bar" id="gp-bar"></div>
+                </div>
+                <span id="gp-time-total">0:00</span>
+            </div>
+        </div>
+        
+        <!-- Bloc Droit : Actions Avancées -->
+        <div class="gp-actions">
+            <!-- Le futur bouton qui déploiera le Datashard de texte -->
+            <button id="gp-lyrics-btn" class="action-btn disabled">
+                ACCESS DECIPHERED SONGSHARD DATA
+            </button>
+            
+            <!-- LE MOTEUR UNIQUE (Invisible) -->
+            <audio id="gp-audio-engine" src="" preload="metadata"></audio>
+        </div>
+    </div>

@@ -1,0 +1,4 @@
+node_modules/
+_site/
+# Images d'origine (lourdes) : gardées sur ton PC, pas dans le dépôt. Voir README.
+originals/

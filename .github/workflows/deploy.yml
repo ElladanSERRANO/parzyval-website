@@ -1,0 +1,47 @@
+# Construit le site avec Eleventy puis le met en ligne sur GitHub Pages à chaque push sur "main".
+#
+# Réglage à faire UNE fois sur GitHub : Settings -> Pages -> "Build and deployment" -> Source : "GitHub Actions".
+#
+# Si GitHub se plaint qu'une action est introuvable ou obsolète, change simplement le numéro de version
+# (@v6, @v5...) ; ce sont les versions en vigueur au moment de l'écriture de ce fichier.
+
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # permet aussi de lancer le déploiement à la main depuis l'onglet Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

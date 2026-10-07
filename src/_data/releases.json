@@ -1,0 +1,298 @@
+[
+  {
+    "id": "the-infinite-twist",
+    "file": "album_infinite_twist.html",
+    "group": "album",
+    "type": "Album",
+    "navLabel": "The Infinite Twist",
+    "title": "Album - The Infinite Twist",
+    "hubTitle": "The Infinite Twist",
+    "coverAlt": "The Infinite Twist Cover",
+    "cover": "covers/infinite_twist_cover.webp",
+    "lore": {
+      "title": "The Infinite Twist",
+      "text": "First official complete release from the Fallen Guardians (1st band formation) in late May 2080, offering eccentric Industrial Metal tracks about deep and twisted topics, sad and melancholic lyrics, inspired by early 21th century bands.",
+      "holo": [
+        "infinite_twist/img1.webp",
+        "infinite_twist/img2.webp",
+        "infinite_twist/img3.webp"
+      ],
+      "links": [
+        {
+          "url": "https://archiveofourown.org/works/69845721/chapters/197449391",
+          "label": "Chapter 4 & Chapter 9"
+        }
+      ]
+    },
+    "tracks": [
+      {
+        "title": "Fuel My Heart",
+        "file": "Albums/The_Infinite_Twist/Fuel_My_Heart.mp3",
+        "download": "Fuel_My_Heart.mp3"
+      },
+      {
+        "title": "Rise Above The Fire",
+        "file": "Albums/The_Infinite_Twist/Rise_Above_The_Fire.mp3",
+        "download": "Rise_Above_The_Fire.mp3"
+      },
+      {
+        "title": "Shadow Of The Other",
+        "file": "Albums/The_Infinite_Twist/Shadow_Of_The_Other.mp3",
+        "download": "Shadow_Of_The_Other.mp3"
+      },
+      {
+        "title": "Burn The Stars And Flood The Sun",
+        "file": "Albums/The_Infinite_Twist/Burn_The_Stars_And_Flood_The_Sun.mp3",
+        "download": "Burn_The_Stars_And_Flood_The_Sun.mp3"
+      },
+      {
+        "title": "Equilibrium",
+        "file": "Albums/The_Infinite_Twist/Equilibrium.mp3",
+        "download": "Equilibrium.mp3"
+      },
+      {
+        "title": "Final Stop For Madness",
+        "file": "Albums/The_Infinite_Twist/Final_Stop_for_Madness.mp3",
+        "download": "Final_Stop_for_Madness.mp3"
+      },
+      {
+        "title": "The Killing Love",
+        "file": "Albums/The_Infinite_Twist/The_Killing_Love.mp3",
+        "download": "The_Killing_Love.mp3"
+      },
+      {
+        "title": "Dark Poison & Corrupted Heart",
+        "file": "Albums/The_Infinite_Twist/Dark_Poison_And_Corrupted_Heart.mp3",
+        "download": "Dark_Poison_And_Corrupted_Heart.mp3"
+      },
+      {
+        "title": "Mask Of Fate",
+        "file": "Albums/The_Infinite_Twist/Mask_Of_Fate.mp3",
+        "download": "Mask_Of_Fate.mp3"
+      }
+    ]
+  },
+  {
+    "id": "the-march-of-the-flawed",
+    "file": "ep_the_march.html",
+    "group": "ep",
+    "type": "EP",
+    "navLabel": "The March of the Flawed",
+    "title": "EP - The March Of The Flawed",
+    "hubTitle": "The March of the Flawed",
+    "coverAlt": "The March of the Flawed Cover",
+    "cover": "covers/march_flawed_cover.webp",
+    "lore": {
+      "title": "The March of the Flawed",
+      "text": "EP released in October 2080, celebrating the battle waged by Valerie, Lexa, Nikola, and their followers against Bianca Sheppard's relentless media attacks.",
+      "holo": [
+        "march_flawed/img1.webp",
+        "march_flawed/img2.webp",
+        "march_flawed/img3.webp"
+      ],
+      "links": [
+        {
+          "url": "https://archiveofourown.org/works/69845721/chapters/222729681",
+          "label": "Chapter 17 - Raise Your Banner"
+        }
+      ]
+    },
+    "tracks": [
+      {
+        "title": "Bones of the Hopeless",
+        "file": "EPs/The_March_Of_The_Flawed/Bones_of_the_Hopeless.mp3",
+        "download": "Bones_of_the_Hopeless.mp3"
+      },
+      {
+        "title": "Kings And Queens Of Flaws",
+        "file": "EPs/The_March_Of_The_Flawed/Kings_and_Queens_of_Flaws.mp3",
+        "download": "Kings_and_Queens_of_Flaws.mp3"
+      },
+      {
+        "title": "Kinetic Creed",
+        "file": "EPs/The_March_Of_The_Flawed/Kinetic_Creed_Original_Remake.mp3",
+        "download": "Kinetic_Creed_Original_Remake.mp3"
+      },
+      {
+        "title": "Through The Heart Of The Wicked",
+        "file": "EPs/The_March_Of_The_Flawed/Through_The_Heart_Of_The_Wicked.mp3",
+        "download": "Through_The_Heart_Of_The_Wicked.mp3"
+      },
+      {
+        "title": "A Glass For The Wounded Spirits",
+        "file": "EPs/The_March_Of_The_Flawed/A_Glass_For_The_Wounded_Spirits.mp3",
+        "download": "A_Glass_For_The_Wounded_Spirits.mp3"
+      },
+      {
+        "title": "The Mathematical Inevitability Of An Empty Room",
+        "file": "EPs/The_March_Of_The_Flawed/The_Mathematical_Inevitability_of_an_Empty_Room.mp3",
+        "download": "The_Mathematical_Inevitability_of_an_Empty_Room.mp3"
+      }
+    ]
+  },
+  {
+    "id": "the-march-live-7th-hell",
+    "file": "ep_the_march_live.html",
+    "group": "live",
+    "type": "Live",
+    "navLabel": "Live at 7th Hell",
+    "title": "EP - The March Of The Flawed (Live at 7th Hell)",
+    "hubTitle": "The March Of The Flawed (Live at 7th Hell)",
+    "coverAlt": "7th Hell Live Cover",
+    "cover": "covers/7th_hell_cover.webp",
+    "lore": {
+      "title": "The March of the Flawed - Live at the 7th Hell",
+      "text": "Live Performance at the 7th Hell club in Downtown, mid-fall, unleashing the power of the Decibel Queen, the King of Chaos and the Reckless Princess facing more than 2.500 followers.",
+      "holo": [
+        "7th_hell_live/img1.webp",
+        "7th_hell_live/img2.webp",
+        "7th_hell_live/img3.webp"
+      ],
+      "links": [
+        {
+          "url": "https://archiveofourown.org/works/69845721/chapters/232469531#workskin",
+          "label": "Chapter 19 - STEP UP OR GET THE HELL OUT OF THE WAY!!!"
+        }
+      ]
+    },
+    "tracks": [
+      {
+        "title": "Kings And Queens Of Flaws (Live Arena Cut)",
+        "file": "Lives/Live_7th_Hell/Kings_and_Queens_of_Flaws_(Live_Arena_Cut).mp3",
+        "download": "Kings_and_Queens_of_Flaws.mp3"
+      },
+      {
+        "title": "Bones of the Hopeless (Live Arena Cut)",
+        "file": "Lives/Live_7th_Hell/Bones_of_the_Hopeless_(Live_Arena_Cut).mp3",
+        "download": "Bones_of_the_Hopeless.mp3"
+      },
+      {
+        "title": "Through The Heart Of The Wicked (Live Arena Cut)",
+        "file": "Lives/Live_7th_Hell/Through_The_Heart_Of_The_Wicked_(Live_Arena_Cut).mp3",
+        "download": "Through_The_Heart_Of_The_Wicked.mp3"
+      },
+      {
+        "title": "A Glass For The Wounded Spirits (Live Arena Cut)",
+        "file": "Lives/Live_7th_Hell/A_Glass_For_The_Wounded_Spirits_(Live_Arena_Cut).mp3",
+        "download": "A_Glass_For_The_Wounded_Spirits.mp3"
+      },
+      {
+        "title": "The Mathematical Inevitability Of An Empty Room (Live Arena Cut)",
+        "file": "Lives/Live_7th_Hell/The_Mathematical_Inevitability_of_an_Empty_Room_(Live_Arena_Cut).mp3",
+        "download": "The_Mathematical_Inevitability_of_an_Empty_Room.mp3"
+      },
+      {
+        "title": "Kinetic Creed (Live Arena Cut)",
+        "file": "Lives/Live_7th_Hell/Kinetic_Creed_(Live_Arena_Cut).mp3",
+        "download": "Kinetic_Creed_Original_Remake.mp3"
+      }
+    ]
+  },
+  {
+    "id": "judys-birthday",
+    "file": "special_november_judy.html",
+    "group": "special",
+    "type": "Special",
+    "navLabel": "Judy's Birthday At Lizzie's",
+    "title": "Judy's Birthday At Lizzie's",
+    "hubTitle": "Judy's Birthday At Lizzie's",
+    "coverAlt": "Judy's Birthday",
+    "hubHighlight": true,
+    "cover": "covers/judy_birthday_cover.webp",
+    "lore": {
+      "title": "Judy's Birthday At Lizzie's",
+      "text": "After weeks of secret preparations, the Fallen Guardians perform a very special, unique private concert at Lizzie's Bar the 27th November evening. Four songs mastered for Judy Alvarez, the only woman in the world who could keep Valerie, falling Darchangel, out of the toxic waters of her addictions, before turning into the magnificent Decibel Queen.",
+      "holo": [
+        "judy_birthday/img1.webp",
+        "judy_birthday/img2.webp",
+        "judy_birthday/img3.webp"
+      ],
+      "links": [
+        {
+          "url": "https://archiveofourown.org/works/69845721/chapters/237784766",
+          "label": "Chapter 22 - For Evigt (The Bliss)"
+        }
+      ]
+    },
+    "tracks": [
+      {
+        "title": "Amaranthine (Amaranthe Cover)",
+        "file": "Specials/Judy_Birthday/Amaranthine (Cover).mp3",
+        "download": "Amaranthine_Cover.mp3"
+      },
+      {
+        "title": "Rising Sun (Cain's Offering Cover)",
+        "file": "Specials/Judy_Birthday/Rising Sun (Party at Lizzie's Mix V2).mp3",
+        "download": "Rising_Sun_Cover.mp3"
+      },
+      {
+        "title": "Endlessly (Amaranthe Cover)",
+        "file": "Specials/Judy_Birthday/Endlessly (Cover).mp3",
+        "download": "Endlessly_Cover.mp3"
+      },
+      {
+        "title": "Loads Of Imperfection And A Splash Of Chaos",
+        "file": "Specials/Judy_Birthday/Loads Of Imperfection And A Splash Of Chaos.mp3",
+        "download": "Loads_Of_Imperfection_And_A_Splash_Of_Chaos.mp3"
+      }
+    ]
+  },
+  {
+    "id": "kinetic-creed",
+    "file": "special_kinetic_creed.html",
+    "group": "special",
+    "type": "Special",
+    "navLabel": "Archive: Kinetic Creed",
+    "title": "Archive : Kinetic Creed",
+    "custom": true,
+    "hub": false,
+    "tracks": [
+      {
+        "role": "relic",
+        "title": "Kinetic Creed - The Classic",
+        "blurb": "You wanted it, Sky, now here is a worthy page for this relic you adore that much.",
+        "badge": "THE RELIC V1.0",
+        "cover": "kinetic_creed/original_classic.webp",
+        "file": "Specials/Kinetic_Creed/Kinetic_Creed_Classic.mp3",
+        "download": "Kinetic_Creed_Original.mp3",
+        "downloadLabel": "↓ EXTRACT RELIC DATA"
+      },
+      {
+        "role": "mutation",
+        "mutationId": "M-01",
+        "title": "Kinetic Creed (Original Remake)",
+        "blurb": "Worthy successor to a prototype that will change the course of the Fallen Guardians' careers",
+        "cover": "kinetic_creed/original_remake.webp",
+        "file": "Specials/Kinetic_Creed/Kinetic_Creed_Original_Remake.mp3",
+        "download": "Kinetic_Creed_BOriginal_Remake.mp3"
+      },
+      {
+        "role": "mutation",
+        "mutationId": "M-02",
+        "title": "Kinetic Creed (Freestyle Rap Cut)",
+        "blurb": "Inspired by the heyday of rap in the '90s, a freestyle remix — hell yeah, gangsta man!",
+        "cover": "kinetic_creed/nineties_oldschool_rap.webp",
+        "file": "Specials/Kinetic_Creed/Kinetic_Creed_Freestyle_Rap_Cut.mp3",
+        "download": "Kinetic_Creed_Rap.mp3"
+      },
+      {
+        "role": "mutation",
+        "mutationId": "M-02",
+        "title": "Kinetic Creed (Shonen OP Cut)",
+        "blurb": "Just for the sheer fun of it, imagine this as a badass anime opening. Seriously, doesn't it make you want to see our favorite trio slicing and dicing their enemies to pieces with katana and rifles?",
+        "cover": "kinetic_creed/shonen_op.webp",
+        "file": "Specials/Kinetic_Creed/Kinetic_Creed_The_Shōnen_OP_Cut.mp3",
+        "download": "Kinetic_Creed_Shonen_OP.mp3"
+      },
+      {
+        "role": "mutation",
+        "mutationId": "M-02",
+        "title": "Kinetic Creed (Cyber-Kinetic Cut)",
+        "blurb": "Mixing electro with DnB (Drums and Bass) — a genre I knew absolutely nothing about (thanks again, Sky, for introducing me to it) — Valerie’s voice really does blend perfectly with every style. (Too bad the bass didn’t go over very well with the band, just like their bassist, lol)",
+        "cover": "kinetic_creed/dnb_cut.webp",
+        "file": "Specials/Kinetic_Creed/Kinetic Creed_The_Cyber-Kinetic_Cut_V2.mp3",
+        "download": "Kinetic_Creed_DnB.mp3"
+      }
+    ]
+  }
+]
