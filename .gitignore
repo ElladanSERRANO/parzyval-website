@@ -2,3 +2,6 @@ node_modules/
 _site/
 # Images d'origine (lourdes) : gardées sur ton PC, pas dans le dépôt. Voir README.
 originals/
+# Galerie d'art : exports en pleine résolution et dossier à envoyer sur R2 (jamais dans git). Voir README.
+originals-art/
+art-upload/

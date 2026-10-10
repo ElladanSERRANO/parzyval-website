@@ -1,0 +1,62 @@
+---
+title: "Baguette_Sadique Emporium | Art Gallery"
+permalink: "art.html"
+section: art
+---
+{% extends "layouts/base.njk" %}
+
+{% block header %}
+<header class="page-header">
+    <h1>Baguette_Sadique / Parzyval Art Gallery</h1>
+    <p class="subtitle">Drawings and photomontages for the Cyberpunk universe</p>
+</header>
+{% endblock %}
+
+{% block main %}
+    <main class="art-gallery">
+        {% if catalog.art.length %}
+
+        {# Les filtres n'apparaissent que s'il y a au moins deux catégories #}
+        {% if catalog.artCategories.length > 1 %}
+        <div class="art-filters" role="group" aria-label="Filter by category">
+            <button type="button" class="art-filter active" data-filter="all" aria-pressed="true">All <span class="art-count">{{ catalog.art.length }}</span></button>
+            {% for c in catalog.artCategories %}
+            <button type="button" class="art-filter" data-filter="{{ c.name }}" aria-pressed="false">{{ c.name }} <span class="art-count">{{ c.count }}</span></button>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="art-grid">
+            {% for a in catalog.art %}
+            <button type="button" class="art-card"
+                data-id="{{ a.id }}"
+                data-title="{{ a.title }}"
+                data-category="{{ a.category }}"
+                data-date="{{ a.date }}"
+                data-alt="{{ a.alt or a.title }}"
+                data-description="{{ a.description }}"
+                data-thumb="{{ a.thumbUrl }}"
+                data-display="{{ a.displayUrl }}"
+                data-original="{{ a.originalUrl }}"
+                data-original-name="{{ a.originalName }}"
+                data-original-label="{{ a.originalLabel }}"
+                data-size="{{ a.sizeLabel }}"
+                data-links="{{ (a.links or []) | dump }}"
+                aria-label="View {{ a.title }}">
+                <img src="{{ a.thumbUrl }}" width="{{ a.width }}" height="{{ a.height }}" alt="{{ a.alt or a.title }}" loading="lazy" decoding="async">
+                <span class="art-caption">
+                    <strong>{{ a.title }}</strong>
+                    <span>{{ a.category }}{% if a.date %} · {{ a.date }}{% endif %}</span>
+                </span>
+            </button>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="art-empty">
+            <p>> No artwork published yet.</p>
+            <p>> Signal incoming...</p>
+        </div>
+        {% endif %}
+    </main>
+{% endblock %}

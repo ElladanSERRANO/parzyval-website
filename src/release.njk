@@ -13,6 +13,7 @@ permalink: "{{ release.file }}"
 {% block main %}
     <main class="ep-grid">
 
+        {% if release.lore %}
         <!-- Carte de Contexte / Liens AO3 -->
         <div class="lore-card cinematic-card">
 
@@ -28,6 +29,7 @@ permalink: "{{ release.file }}"
                 <h2>{{ release.lore.title }}</h2>
                 <p>{{ release.lore.text }}</p>
             </div>
+            {% if release.lore.links.length %}
             <div class="lore-actions" style="display: flex; flex-direction: column; gap: 10px;">
                 {% for link in release.lore.links %}
                 <a href="{{ link.url }}" target="_blank" class="ao3-btn">
@@ -35,7 +37,9 @@ permalink: "{{ release.file }}"
                 </a>
                 {% endfor %}
             </div>
+            {% endif %}
         </div>
+        {% endif %}
 
         {% for t in release.tracks %}
         {{ songCard(t, loop.index) }}

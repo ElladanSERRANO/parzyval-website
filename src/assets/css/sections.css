@@ -1,0 +1,523 @@
+/* ==========================================================================
+   SECTIONS : accueil à deux portes, galerie d'art, visionneuse, menu Audio
+   (chargé après style.css ; utilise les mêmes variables de couleurs et de polices)
+   ========================================================================== */
+
+
+/* --- MENU : titres de groupes dans le menu déroulant Audio --- */
+.dropdown-content .dropdown-heading {
+    display: block;
+    padding: 10px 20px 4px;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--neon-cyan);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dropdown-content a.dropdown-main {
+    color: var(--neon-cyan);
+    font-weight: bold;
+}
+
+
+/* --- LECTEUR GLOBAL : caché sur l'accueil et la galerie tant qu'aucune piste n'a été lancée --- */
+body[data-section="home"]:not(.player-on) .global-player,
+body[data-section="art"]:not(.player-on) .global-player {
+    display: none;
+}
+
+body[data-section="home"]:not(.player-on),
+body[data-section="art"]:not(.player-on) {
+    padding-bottom: 0;
+}
+
+
+/* --- ACCUEIL : LES DEUX PORTES --- */
+.door-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.door-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 77, 148, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+}
+
+.door-card:hover,
+.door-card:focus-visible {
+    transform: translateY(-6px);
+    border-color: var(--neon-pink);
+    box-shadow: 0 12px 35px rgba(255, 77, 148, 0.25);
+    outline: none;
+}
+
+.door-card:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+}
+
+.door-visual {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    filter: contrast(110%);
+}
+
+/* Dégradé vers la carte + lignes de scan, comme sur les bannières des pages */
+.door-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, transparent 45%, var(--card-bg) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.25) 2px, rgba(0, 0, 0, 0.25) 4px);
+}
+
+.door-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px 25px 25px;
+}
+
+.door-tag {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--neon-cyan);
+}
+
+.door-body h2 {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+.door-body p {
+    margin: 0;
+    line-height: 1.4;
+    color: #9a9aa5;
+}
+
+.door-stat {
+    margin-top: 6px;
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    color: var(--neon-pink);
+}
+
+@media (max-width: 768px) {
+    .door-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* --- GALERIE : FILTRES --- */
+.art-gallery {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.art-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.art-filter {
+    font-family: var(--font-tech);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    color: var(--text-main);
+    background: transparent;
+    border: 1px solid rgba(0, 243, 255, 0.35);
+    border-radius: 4px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.art-filter:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+}
+
+.art-filter.active {
+    color: var(--neon-pink);
+    background: rgba(255, 77, 148, 0.15);
+    border-color: var(--neon-pink);
+}
+
+.art-filter:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+}
+
+.art-filter .art-count {
+    margin-left: 6px;
+    opacity: 0.6;
+}
+
+
+/* --- GALERIE : GRILLE EN COLONNES (portraits et paysages sans recadrage) --- */
+.art-grid {
+    column-count: 3;
+    column-gap: 20px;
+}
+
+@media (max-width: 900px) {
+    .art-grid { column-count: 2; }
+}
+
+@media (max-width: 520px) {
+    .art-grid { column-count: 1; }
+}
+
+.art-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 0;
+    background: #0d0d12;
+    border: 1px solid rgba(255, 77, 148, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: zoom-in;
+    break-inside: avoid;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+}
+
+/* L'attribut hidden doit gagner contre "display: block" (utilisé par les filtres) */
+.art-card[hidden] {
+    display: none !important;
+}
+
+.art-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.art-card:hover,
+.art-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--neon-pink);
+    box-shadow: 0 10px 30px rgba(255, 77, 148, 0.25);
+}
+
+.art-card:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+}
+
+.art-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 40px 14px 12px;
+    background: linear-gradient(180deg, transparent, rgba(8, 8, 12, 0.92));
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s, transform 0.25s;
+    pointer-events: none;
+}
+
+.art-card:hover .art-caption,
+.art-card:focus-visible .art-caption {
+    opacity: 1;
+    transform: none;
+}
+
+/* Sur écran tactile, il n'y a pas de survol : la légende reste visible */
+@media (hover: none) {
+    .art-caption {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.art-caption strong {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.art-caption span {
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    color: var(--neon-cyan);
+}
+
+.art-empty {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px 30px;
+    font-family: var(--font-tech);
+    color: var(--neon-cyan);
+    background: rgba(13, 13, 18, 0.8);
+    border-left: 4px solid var(--neon-cyan);
+    border-radius: 6px;
+}
+
+.art-empty p {
+    margin: 6px 0;
+}
+
+
+/* --- VISIONNEUSE PLEIN ÉCRAN --- */
+body.lb-open {
+    overflow: hidden;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 3000; /* au-dessus du lecteur (2000) et du menu (1000) */
+    display: flex;
+    flex-direction: column;
+    background: #050509; /* fond opaque : rien ne doit transparaître derrière l'oeuvre */
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.lightbox[hidden] {
+    display: none;
+}
+
+.lightbox.open {
+    opacity: 1;
+}
+
+.lb-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+    font-family: var(--font-tech);
+}
+
+.lb-counter {
+    margin-right: auto;
+    letter-spacing: 2px;
+    color: var(--neon-cyan);
+}
+
+.lb-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.lb-btn {
+    display: inline-block;
+    font-family: var(--font-tech);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--text-main);
+    background: transparent;
+    border: 1px solid rgba(255, 77, 148, 0.5);
+    border-radius: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lb-btn:hover {
+    color: var(--neon-pink);
+    background: rgba(255, 77, 148, 0.15);
+    border-color: var(--neon-pink);
+}
+
+.lb-btn[aria-pressed="true"] {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+}
+
+.lb-btn[hidden] {
+    display: none;
+}
+
+.lb-btn:focus-visible,
+.lb-nav:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+}
+
+.lb-stage {
+    position: relative;
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Le conteneur défile quand l'image est zoomée ; "margin: auto" centre l'image sinon */
+.lb-viewport {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
+    cursor: zoom-in;
+}
+
+.lb-viewport img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: filter 0.3s ease;
+}
+
+/* Miniature agrandie en attendant la version complète */
+.lb-viewport img.lb-loading {
+    filter: blur(6px);
+}
+
+.lb-viewport.zoomed {
+    cursor: grab;
+}
+
+.lb-viewport.zoomed img {
+    max-width: none;
+    max-height: none;
+}
+
+.lb-viewport.dragging {
+    cursor: grabbing;
+}
+
+.lb-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 48px;
+    height: 80px;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: var(--neon-pink);
+    background: rgba(8, 8, 12, 0.6);
+    border: 1px solid rgba(255, 77, 148, 0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lb-nav:hover {
+    background: rgba(255, 77, 148, 0.2);
+    border-color: var(--neon-pink);
+}
+
+.lb-prev { left: 10px; border-radius: 0 6px 6px 0; }
+.lb-next { right: 10px; border-radius: 6px 0 0 6px; }
+
+.lb-caption {
+    max-height: 28vh;
+    overflow-y: auto;
+    padding: 12px 20px 16px;
+    border-top: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.lb-caption h3 {
+    margin: 0 0 4px;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.lb-meta {
+    margin: 0 0 6px;
+    font-family: var(--font-tech);
+    font-size: 0.85rem;
+    color: var(--neon-cyan);
+}
+
+.lb-desc {
+    margin: 0 0 8px;
+    max-width: 800px;
+    line-height: 1.4;
+    color: #b5b5c0;
+}
+
+.lb-desc:empty,
+.lb-links:empty {
+    display: none;
+}
+
+.lb-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    /* Ligne 1 : compteur + fermer ; ligne 2 : zoom, taille réelle, téléchargement */
+    .lb-topbar {
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        padding: 8px 10px;
+    }
+    .lb-counter { order: 1; }
+    .lb-close { order: 2; }
+    .lb-actions {
+        order: 3;
+        flex: 1 0 100%;
+        gap: 6px;
+        justify-content: flex-start;
+    }
+    .lb-btn {
+        padding: 6px 8px;
+        font-size: 0.7rem;
+        letter-spacing: 0;
+    }
+    .lb-nav {
+        width: 36px;
+        height: 60px;
+        opacity: 0.75;
+    }
+    .lb-caption {
+        padding: 10px 14px 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lightbox,
+    .art-card,
+    .art-caption,
+    .lb-viewport img {
+        transition: none;
+    }
+}

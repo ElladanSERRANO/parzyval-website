@@ -6,8 +6,10 @@
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/sections.css">
 </head>
-<body>
+{% set sectionId = section or 'audio' %}
+<body data-section="{{ sectionId }}">
 
     {% include "partials/nav.njk" %}
 
@@ -21,17 +23,22 @@
 {# Emplacement réservé au terminal d'accueil (page d'accueil uniquement) #}
 {% block afterHeader %}{% endblock %}
 
-    {# La bande d'images d'ambiance est affichée sur toutes les pages #}
+    {# La bande d'images d'ambiance est réservée aux pages de la section audio #}
+    {% if sectionId == 'audio' %}
     {% include "partials/ambiance.njk" %}
+    {% endif %}
 
 {% block main %}{% endblock %}
 
     {% include "partials/lyrics-overlay.njk" %}
+
+    {% include "partials/lightbox.njk" %}
 
     {% include "partials/player.njk" %}
 
     {% include "partials/footer.njk" %}
 
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/gallery.js"></script>
 </body>
 </html>

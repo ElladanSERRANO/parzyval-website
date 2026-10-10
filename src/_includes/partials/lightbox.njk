@@ -1,0 +1,25 @@
+<!-- --- VISIONNEUSE D'OEUVRES (GALERIE) --- -->
+    <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lb-title">
+        <div class="lb-topbar">
+            <span class="lb-counter" id="lb-counter">1 / 1</span>
+            <div class="lb-actions">
+                <button type="button" id="lb-zoom" class="lb-btn" aria-pressed="false">⤢ Zoom</button>
+                <a id="lb-open" class="lb-btn" target="_blank" rel="noopener">↗ Full size</a>
+                <a id="lb-download" class="lb-btn" download>↓ Original</a>
+            </div>
+            <button type="button" id="lb-close" class="lb-btn lb-close" aria-label="Close">✖</button>
+        </div>
+        <div class="lb-stage" id="lb-stage">
+            <button type="button" id="lb-prev" class="lb-nav lb-prev" aria-label="Previous artwork">❮</button>
+            <div class="lb-viewport" id="lb-viewport">
+                <img id="lb-img" alt="">
+            </div>
+            <button type="button" id="lb-next" class="lb-nav lb-next" aria-label="Next artwork">❯</button>
+        </div>
+        <div class="lb-caption" aria-live="polite">
+            <h3 id="lb-title"></h3>
+            <p class="lb-meta" id="lb-meta"></p>
+            <p class="lb-desc" id="lb-desc"></p>
+            <div class="lb-links" id="lb-links"></div>
+        </div>
+    </div>

@@ -1,0 +1,36 @@
+---
+title: "Baguette_Sadique Emporium | Audio Hub"
+permalink: "audio.html"
+section: audio
+---
+{% extends "layouts/base.njk" %}
+
+{% block afterHeader %}
+<!-- Terminal d'Accueil -->
+    <section class="welcome-terminal">
+        <div class="terminal-header">
+            <span class="status-dot"></span> Connexion Established
+        </div>
+        <div class="terminal-body">
+            <h2>AI Generated Songs by Me and Suno - Definitively Not Slop</h2>
+            <p>Welcome In this WIP Website, where you can have unlimited access to all the AI generated songs I 'made', representing the journey of The Fallen Guardians through the year of 2080 up to an unknown future... All of them are downloable, for boundless delight !</p>
+        </div>
+        <div class="terminal-footer">
+            <span>> Server Status : <span class="cyan-text">Online</span></span>
+            <span>> Audio Tracks : <span class="pink-text">Work In Progress ({{ catalog.totalTracks }} for now on)</span></span>
+        </div>
+    </section>
+{% endblock %}
+
+{% block main %}
+    <main class="hub-grid">
+        {# Une carte par EP / album / live / special (src/_data/releases.json) #}
+        {% for r in catalog.hub %}
+        <a href="./{{ r.file }}" class="release-card">
+            <img src="{{ r.coverUrl }}" alt="{{ r.coverAlt }}" class="release-cover">
+            <h2>{{ r.hubTitle }}</h2>
+            <p{% if r.hubHighlight %} class="pink-text"{% endif %}>{{ r.tracks.length }} Tracks • {{ r.type }}</p>
+        </a>
+        {% endfor %}
+    </main>
+{% endblock %}

@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. LE MOTEUR DE CHARGEMENT & ANALYSE DE DONNÉES ---
     const loadTrackIntoHUD = (trackData) => {
         currentTrack = trackData;
+        document.body.classList.add('player-on'); // révèle le lecteur sur les pages où il est masqué tant qu'il est inactif
         gpTitle.textContent = trackData.title;
         gpArtist.textContent = "The Fallen Guardians"; 
         gpAudio.src = trackData.src;
@@ -82,42 +83,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadTrackIntoHUD(virtualPlaylist[currentTrackIndex]);
             });
         });
+    };
 
-        const downloadBtns = document.querySelectorAll('.download-btn');
-        downloadBtns.forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                const fileUrl = btn.getAttribute('href');
-                const fileName = btn.getAttribute('download') || 'Parzyval_Track.mp3'; 
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '⏳ Décryptage...';
-                btn.style.pointerEvents = 'none';
-                try {
-                    const response = await fetch(fileUrl);
-                    if (!response.ok) throw new Error("Erreur réseau");
-                    const blob = await response.blob();
-                    const blobUrl = window.URL.createObjectURL(blob);
-                    const tempLink = document.createElement('a');
-                    tempLink.style.display = 'none';
-                    tempLink.href = blobUrl;
-                    tempLink.download = fileName;
-                    document.body.appendChild(tempLink);
-                    tempLink.click();
-                    document.body.removeChild(tempLink);
-                    window.URL.revokeObjectURL(blobUrl);
-                    btn.innerHTML = originalText;
-                    btn.style.pointerEvents = 'auto';
-                } catch (error) {
-                    btn.innerHTML = '❌ Signal Perdu';
-                    setTimeout(() => { btn.innerHTML = originalText; btn.style.pointerEvents = 'auto'; }, 3000);
-                }
-            });
+    // --- TÉLÉCHARGEMENTS (MP3 et originaux de la galerie) ---
+    // Un seul écouteur pour toute la page : il suffit qu'un lien ait l'attribut "download".
+    const initDownloads = () => {
+        document.body.addEventListener('click', async (e) => {
+            const btn = e.target.closest('a[download]');
+            if (!btn) return;
+            // Le lien temporaire créé plus bas déclenche lui aussi un clic : on le laisse passer pour que le navigateur télécharge vraiment
+            if (btn.dataset.direct) return;
+            e.preventDefault();
+            if (btn.dataset.busy) return;
+
+            const fileUrl = btn.getAttribute('href');
+            const fileName = btn.getAttribute('download') || 'Parzyval_Download';
+            const originalText = btn.innerHTML;
+            const restore = () => { btn.innerHTML = btn.dataset.label || originalText; };
+            btn.dataset.busy = '1';
+            btn.innerHTML = '⏳ Décryptage...';
+            btn.style.pointerEvents = 'none';
+            try {
+                const response = await fetch(fileUrl);
+                if (!response.ok) throw new Error("Erreur réseau");
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                const tempLink = document.createElement('a');
+                tempLink.style.display = 'none';
+                tempLink.dataset.direct = '1';
+                tempLink.href = blobUrl;
+                tempLink.download = fileName;
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                document.body.removeChild(tempLink);
+                // On libère le fichier en mémoire seulement après un délai : le navigateur démarre le
+                // téléchargement de façon asynchrone, et supprimer l'adresse trop tôt l'annule (surtout pour les gros fichiers).
+                setTimeout(() => window.URL.revokeObjectURL(blobUrl), 60000);
+                restore();
+                btn.style.pointerEvents = 'auto';
+                delete btn.dataset.busy;
+            } catch (error) {
+                btn.innerHTML = '❌ Signal Perdu';
+                setTimeout(() => { restore(); btn.style.pointerEvents = 'auto'; delete btn.dataset.busy; }, 3000);
+            }
         });
     };
 
     // --- 4. LE ROUTEUR FANTÔME (SPA) ---
-    // Charge une page en arrière-plan et ne remplace que le titre de page, le terminal d'accueil et le <main>.
-    // Le lecteur, le menu, la bande d'images et le footer ne bougent pas : la musique continue.
+    // Charge une page en arrière-plan et ne remplace que l'en-tête, le terminal d'accueil, la bande d'images et le <main>.
+    // Le lecteur, le menu et le footer ne bougent pas : la musique continue.
     const swapPage = async (href, pushState) => {
         try {
             const response = await fetch(href);
@@ -128,16 +142,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const newHeader = doc.querySelector('.page-header');
             const newMain = doc.querySelector('main');
-            const newTerminal = doc.querySelector('.welcome-terminal'); 
             if (!newHeader || !newMain) throw new Error('Structure de page inattendue');
 
+            // Zones remplacées : en-tête et contenu, plus le terminal d'accueil et la bande d'images quand la page en a
             document.querySelector('.page-header').replaceWith(newHeader);
             document.querySelector('main').replaceWith(newMain);
+            document.querySelectorAll('.welcome-terminal, .visual-logs-section').forEach((n) => n.remove());
+            let anchor = newHeader;
+            ['.welcome-terminal', '.visual-logs-section'].forEach((selector) => {
+                const extra = doc.querySelector(selector);
+                if (extra) { anchor.after(extra); anchor = extra; }
+            });
 
-            const currentTerminal = document.querySelector('.welcome-terminal');
-            if (currentTerminal) currentTerminal.remove(); 
-            if (newTerminal) document.querySelector('.page-header').after(newTerminal); 
-
+            document.body.dataset.section = doc.body.dataset.section || 'audio';
             document.title = doc.title; // met à jour le titre de l'onglet
 
             if (pushState) window.history.pushState({}, '', href);
@@ -145,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             initAudioCards(); 
             syncAllButtons(); 
+            document.dispatchEvent(new CustomEvent('page:changed')); // la galerie s'en sert pour ouvrir une oeuvre via l'adresse (#id)
         } catch (err) {
             console.error('Erreur routage:', err);
             window.location.href = href; // plan B : navigation classique
@@ -156,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = e.target.closest('a');
             if (!link) return;
             const href = link.getAttribute('href');
-            if (!href || href.startsWith('http') || href.endsWith('.txt') || href === '#' || link.getAttribute('target') === '_blank' || link.hasAttribute('download')) return;
+            if (!href || href.startsWith('http') || href.endsWith('.txt') || href.startsWith('#') || link.getAttribute('target') === '_blank' || link.hasAttribute('download')) return;
 
             e.preventDefault();
             swapPage(href, true);
@@ -241,5 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 7. INITIALISATION ---
     initAudioCards();
+    initDownloads();
     initRouter();
+    document.dispatchEvent(new CustomEvent('page:changed')); // 1er affichage : permet d'ouvrir une oeuvre depuis l'adresse (#id)
 });

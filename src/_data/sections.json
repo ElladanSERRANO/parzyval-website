@@ -1,0 +1,23 @@
+[
+  {
+    "id": "audio",
+    "label": "Audio",
+    "file": "audio.html",
+    "menuTitle": "Audio Hub",
+    "door": {
+      "tag": "// CHANNEL 01",
+      "text": "The soundtrack of The Fallen Guardians: EPs, albums, live recordings and singles. Free to listen to and to download.",
+      "cover": "global/ambiance1.webp"
+    }
+  },
+  {
+    "id": "art",
+    "label": "Art",
+    "file": "art.html",
+    "door": {
+      "tag": "// CHANNEL 02",
+      "text": "Drawings and photomontages from the same universe, in full resolution. Click to zoom, download the originals.",
+      "cover": "global/ambiance3.webp"
+    }
+  }
+]

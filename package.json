@@ -8,7 +8,8 @@
     "start": "eleventy --serve",
     "build": "eleventy",
     "images": "node scripts/convert-images.mjs",
-    "lyrics": "node scripts/lyrics-todo.mjs"
+    "lyrics": "node scripts/lyrics-todo.mjs",
+    "gallery": "node scripts/build-gallery.mjs"
   },
   "engines": {
     "node": ">=20"

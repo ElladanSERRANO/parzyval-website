@@ -4,16 +4,24 @@
         </div>
         <ul class="nav-links">
             <li><a href="./index.html">Accueil</a></li>
-            {# Le menu est généré automatiquement à partir de src/_data/releases.json #}
-            {% for group in catalog.navGroups %}{% if group.items.length %}
+            {# Menu généré à partir de src/_data/sections.json et releases.json #}
+            {% for s in catalog.sections %}
+            {% if s.groups %}
             <li class="dropdown">
-                <span class="dropbtn">{{ group.label }} <span class="chevron">▼</span></span>
+                <span class="dropbtn">{{ s.label }} <span class="chevron">▼</span></span>
                 <div class="dropdown-content">
+                    <a href="./{{ s.file }}" class="dropdown-main">{{ s.menuTitle or s.label }}</a>
+                    {% for group in s.groups %}{% if group.items.length %}
+                    <span class="dropdown-heading">{{ group.label }}</span>
                     {% for item in group.items %}
                     <a href="./{{ item.file }}">{{ item.navLabel }}</a>
                     {% endfor %}
+                    {% endif %}{% endfor %}
                 </div>
             </li>
-            {% endif %}{% endfor %}
+            {% else %}
+            <li><a href="./{{ s.file }}">{{ s.label }}</a></li>
+            {% endif %}
+            {% endfor %}
         </ul>
     </nav>

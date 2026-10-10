@@ -241,11 +241,14 @@
     "id": "kinetic-creed",
     "file": "special_kinetic_creed.html",
     "group": "special",
-    "type": "Special",
+    "type": "Archive",
     "navLabel": "Archive: Kinetic Creed",
     "title": "Archive : Kinetic Creed",
+    "hubTitle": "Kinetic Creed",
+    "coverAlt": "Kinetic Creed Archive Cover",
+    "hubHighlight": true,
+    "cover": "kinetic_creed/original_classic.webp",
     "custom": true,
-    "hub": false,
     "tracks": [
       {
         "role": "relic",
@@ -292,6 +295,34 @@
         "cover": "kinetic_creed/dnb_cut.webp",
         "file": "Specials/Kinetic_Creed/Kinetic Creed_The_Cyber-Kinetic_Cut_V2.mp3",
         "download": "Kinetic_Creed_DnB.mp3"
+      }
+    ]
+  },
+  {
+    "id": "singles",
+    "file": "special_singles.html",
+    "group": "special",
+    "type": "Singles",
+    "navLabel": "Singles",
+    "title": "Singles - The Fallen Guardians",
+    "hubTitle": "Singles",
+    "coverAlt": "Singles Cover",
+    "hubHighlight": true,
+    "cover": "covers/singles.webp",
+    "lore": {
+      "title": "Singles",
+      "text": "Standalone tracks from the Fallen Guardians, released outside of any EP or album. For now there's just Red Lights, No Mercy in honor of Lexa!"
+    },
+    "tracks": [
+      {
+        "title": "Red Lights, No Mercy",
+        "file": "Specials/Singles/Red_Lights_No_Mercy.mp3",
+        "download": "Red_Lights_No_Mercy.mp3"
+      },
+      {
+        "title": "Silver Spine",
+        "file": "Specials/Singles/Silver_Spine.mp3",
+        "download": "Silver_Spine.mp3"
       }
     ]
   }

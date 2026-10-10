@@ -1,8 +1,16 @@
 ---
 title: "Baguette_Sadique Emporium | Hub"
 permalink: "index.html"
+section: home
 ---
 {% extends "layouts/base.njk" %}
+
+{% block header %}
+<header class="page-header">
+    <h1>Baguette_Sadique / Parzyval Hub</h1>
+    <p class="subtitle">Creations for the Cyberpunk universe</p>
+</header>
+{% endblock %}
 
 {% block afterHeader %}
 <!-- Terminal d'Accueil -->
@@ -11,24 +19,28 @@ permalink: "index.html"
             <span class="status-dot"></span> Connexion Established
         </div>
         <div class="terminal-body">
-            <h2>AI Generated Songs by Me and Suno - Definitively Not Slop</h2>
-            <p>Welcome In this WIP Website, where you can have unlimited access to all the AI generated songs I 'made', representing the journey of The Fallen Guardians through the year of 2080 up to an unknown future... All of them are downloable, for boundless delight !</p>
+            <h2>Choose Your Channel</h2>
+            <p>Two channels are open: the soundtrack of The Fallen Guardians, and the gallery of drawings and photomontages from the same universe. Everything here is free to browse and to download.</p>
         </div>
         <div class="terminal-footer">
             <span>> Server Status : <span class="cyan-text">Online</span></span>
-            <span>> Audio Tracks : <span class="pink-text">Work In Progress ({{ catalog.totalTracks }} for now on)</span></span>
+            <span>> Open Channels : <span class="pink-text">{{ catalog.sections.length }}</span></span>
         </div>
     </section>
 {% endblock %}
 
 {% block main %}
-    <main class="hub-grid">
-        {# Une carte par EP / album / live / special (src/_data/releases.json) #}
-        {% for r in catalog.hub %}
-        <a href="./{{ r.file }}" class="release-card">
-            <img src="{{ r.coverUrl }}" alt="{{ r.coverAlt }}" class="release-cover">
-            <h2>{{ r.hubTitle }}</h2>
-            <p{% if r.hubHighlight %} class="pink-text"{% endif %}>{{ r.tracks.length }} Tracks • {{ r.type }}</p>
+    <main class="door-grid">
+        {# Une porte par section (src/_data/sections.json) #}
+        {% for s in catalog.sections %}
+        <a href="./{{ s.file }}" class="door-card">
+            <div class="door-visual" style="background-image: url('{{ s.coverUrl }}');"></div>
+            <div class="door-body">
+                <span class="door-tag">{{ s.door.tag }}</span>
+                <h2>{{ s.label }}</h2>
+                <p>{{ s.door.text }}</p>
+                <span class="door-stat">{{ s.stat }}</span>
+            </div>
         </a>
         {% endfor %}
     </main>
